@@ -1,0 +1,2532 @@
+  /$$$$$$  /$$$$$$$   /$$$$$$     /$$   /$$ /$$$$$$$$ /$$$$$$$$
+ /$$__  $$| $$__  $$ /$$__  $$   | $$$ | $$| $$_____/|__  $$__/
+| $$  \ $$| $$  \ $$| $$  \ $$   | $$$$| $$| $$         | $$   
+| $$$$$$$$| $$  | $$| $$  | $$   | $$ $$ $$| $$$$$      | $$   
+| $$__  $$| $$  | $$| $$  | $$   | $$  $$$$| $$__/      | $$   
+| $$  | $$| $$  | $$| $$  | $$   | $$\  $$$| $$         | $$   
+| $$  | $$| $$$$$$$/|  $$$$$$//$$| $$ \  $$| $$$$$$$$   | $$   
+|__/  |__/|_______/  \______/|__/|__/  \__/|________/   |__/   
+                                                               
+ADO.Net Conspect
+
+
+----------------------------------------------
+01_IntroADO.NETConnectedMode
+
+Батьківський класс = Базовий класс
+
+
+	Базовий класс			Клас наслідник
+
+	DbConnection
+								SqlConnection
+								OleDbConnection
+								OdbcConnection
+								OracleConnection
+	DbCommand
+								SqlCommand
+								OleDbCommand
+								OdbcCommand
+								OracleCommand
+	DbDataReader							
+								SqlDataReader
+								OleDbDataReader
+								OdbcDataReader
+								OracleDataReader
+	DbDataAdapter							
+								SqlDataAdapter
+								OleDbDataAdapter
+								OdbcDataAdapter
+								OracleDataAdapter
+								
+
+
+
+
+ //connectionString:  Property=value;Property2=value2;
+							
+								//Назва Серверу
+    string connectionString = @"Data Source = DESKTOP-1LCG8OH\SQLEXPRESS; 
+	
+			//Назва БД
+			Initial Catalog = SportShop;
+								
+			//Windows користувач чи ні
+		Integrated Security = true; 		
+		
+		
+			TrustServerCertificate=True;	";
+
+
+	SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+sqlConnection.Open();
+           Console.WriteLine("Connected success!");
+		   
+sqlConnection.Close();
+		   
+		   
+
+
+ExecuteNonQuery() - Скільки рядків задіяно (insert,update,delete)
+
+ExecuteReader() - Поверт таблицю (select)
+
+ExecuteScalar() - коли поверт 1 значення
+
+
+ int id = 2;
+string name = "Pукавиці";
+
+--Execute Reader--
+						`	//показ id
+	string cmdText = $@"select * from Products
+					where Id = {id}";
+	
+							//показ назву
+	string cmdText2 = $@"select * from Products
+					where Name = '{name}'";
+	
+SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+
+
+SqlDataReader reader = command.ExecuteReader();
+
+						//кількість полів
+ for (int i = 0; i < reader.FieldCount; i++) 
+            {						//назва колонки
+                Console.Write($" {reader.GetName(i),14}");
+            }
+			
+            Console.WriteLine("\n------------------");
+
+            while (reader.Read())
+            {
+              
+                for (int i = 0; i < reader.FieldCount; i++)
+                {						//назва рядка
+                    Console.Write($" {reader[i],14} ");
+                }
+                Console.WriteLine();
+            }
+
+ reader.Close();
+
+
+------------------
+02_CRUDInterface
+
+
+
+`
+
+
+ADO.Net Conspect
+
+
+------------------------------------------------------------------------------------------
+01_IntroADO.NETConnectedMode
+
+Батьківський класс = Базовий класс
+
+
+	Базовий класс			Клас наслідник
+
+	DbConnection
+								SqlConnection
+								OleDbConnection
+								OdbcConnection
+								OracleConnection
+	DbCommand
+								SqlCommand
+								OleDbCommand
+								OdbcCommand
+								OracleCommand
+	DbDataReader							
+								SqlDataReader
+								OleDbDataReader
+								OdbcDataReader
+								OracleDataReader
+	DbDataAdapter							
+								SqlDataAdapter
+								OleDbDataAdapter
+								OdbcDataAdapter
+								OracleDataAdapter
+								
+
+
+
+
+ //connectionString:  Property=value;Property2=value2;
+							
+								//Назва Серверу
+    string connectionString = @"Data Source = DESKTOP-1LCG8OH\SQLEXPRESS; 
+	
+			//Назва БД
+			Initial Catalog = SportShop;
+								
+			//Windows користувач чи ні
+		Integrated Security = true; 		
+		
+		
+			TrustServerCertificate=True;	";
+
+
+	SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+sqlConnection.Open();
+           Console.WriteLine("Connected success!");
+		   
+sqlConnection.Close();
+		   
+		   
+
+
+ExecuteNonQuery() - Скільки рядків задіяно (insert,update,delete)
+
+ExecuteReader() - Поверт таблицю (select)
+
+ExecuteScalar() - коли поверт 1 значення
+
+
+ int id = 2;
+string name = "Pукавиці";
+
+--Execute Reader--
+						`	//показ id
+	string cmdText = $@"select * from Products
+					where Id = {id}";
+	
+							//показ назву
+	string cmdText2 = $@"select * from Products
+					where Name = '{name}'";
+	
+SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+
+
+SqlDataReader reader = command.ExecuteReader();
+
+						//кількість полів
+ for (int i = 0; i < reader.FieldCount; i++) 
+            {						//назва колонки
+                Console.Write($" {reader.GetName(i),14}");
+            }
+			
+            Console.WriteLine("\n------------------");
+
+            while (reader.Read())
+            {
+              
+                for (int i = 0; i < reader.FieldCount; i++)
+                {						//назва рядка
+                    Console.Write($" {reader[i],14} ");
+                }
+                Console.WriteLine();
+            }
+
+ reader.Close();
+
+
+------------------------------------------------------------------------------------------
+02_CRUDInterface
+
+
+connection string - змінна інформація
+
+суть підєднаного режиму роботи з бд полягає в тому що ми на початку створ об'єкт 
+	SportShopDb передаємо connectionString і підключаємося до серверу
+
+далі виконуємо CRUD операції з бд коли бд не потрібна ми закриваємо sqlConnection
+
+суть відєднаного режиму роботи полягає в тому що 
+	ми на початку підключаємося до бд дію виконали і відключаємося від бд
+
+
+Щоб реалізувати sqlConnection в main використовуємо using а до класу 
+	підключаємо IDisposeable
+
+
+суть CRUD інтерфейсу працювати з існуючими данними
+
+
+ class SportShopDb: IDisposable
+    {
+        private SqlConnection sqlConnection;
+      
+        public SportShopDb(string connectionString)
+        {
+            sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+        }
+
+
+	 public void Create_As_Insert(Product product) 
+        {
+            string cmdText = $@"INSERT INTO Products
+                              VALUES ('{product.Name}', 
+                                      '{product.Type}',
+                                       {product.Quantity}, 
+                                       {product.Cost}, 
+                                      '{product.Producer}', 
+                                       {product.Price})";
+
+            SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+            command.CommandTimeout = 5; // default - 30sec
+           
+            int rows = command.ExecuteNonQuery();
+            Console.WriteLine(rows + " rows affected!");
+        }
+
+	
+	public List<Product> Read_Get_All() 
+        {
+            string cmdText = $@"select * from Products";
+
+            SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+             SqlDataReader reader = command.ExecuteReader();
+            Console.OutputEncoding = Encoding.UTF8;
+
+            List<Product> products = new List<Product>();   
+         
+            while (reader.Read())
+            {
+                products.Add(
+                    new Product()
+                    {
+                        Id = (int)reader[0],
+                        Name = (string)reader[1],
+                        Type = (string)reader[2],
+                        Quantity = (int)reader[3],
+                        Cost = (int)reader[4],
+                        Producer = (string)reader[5],
+                        Price = (int)reader[6]
+                    });
+            }
+            reader.Close();
+            return products;    
+        }
+
+
+
+	public void Delete(int id) 
+        {
+            string cmdText = $@"delete Products where Id = {id}";
+
+            SqlCommand command = new SqlCommand(cmdText, sqlConnection);       
+            int rows = command.ExecuteNonQuery();
+			
+			Console.WriteLine(rows + " rows Affected")
+        }
+
+        public void Dispose()
+        {
+            sqlConnection.Close();  
+        }
+	}
+
+------------------------------------------------------------------------------------------
+03_SQLInjection. Data Access Layer
+
+
+Чистий ADO.NET -> використ sql команди напряму
+
+
+
+'{Name}' - уразливий до SQL injection
+
+
+Тільки command може заборонити sql інєкції
+
+
+public List<Product> Get_By_Name(string _user_name)
+{
+	string cmdText = $@"select * from Products where Name = @name";
+	
+	SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+	command.Parameters.Add("name", System.Data.SqlDbType.NVarChar).Value = _user_name;
+	
+						назва змінної	тип данних					кому присвоїти
+	
+	
+	SqlDataReader reader = command.ExecuteReader();
+	return GetProductsByQuery(reader);
+}
+						
+
+	command.Parameters.AddWithValue("name", product.Name);
+								псевдонім		назва об'єкта
+
+
+			-самий простий-
+			
+string cmdText = $@"INSERT INTO Products
+VALUES (@name, @type, @quantity, @cost,@producer, @price)";
+
+SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+
+command.Parameters.AddWithValue("name", product.Name);
+command.Parameters.AddWithValue("type", product. Type);
+command.Parameters.AddWithValue("quantity", product.quantity);
+command.Parameters.AddWithValue("product", product.producer);
+
+
+
+---
+
+ private void ShowFunction(string cmdText,params SqlParameter[] parameters)
+        {
+            SqlCommand command = new SqlCommand(cmdText, sqlConnection);
+
+            if (parameters!=null)
+            {
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    command.Parameters.Add(parameters[i]);
+                }
+            }
+
+
+  SqlParameter param1 = new SqlParameter
+            {
+                ParameterName = "formatedDate",
+                SqlDbType = System.Data.SqlDbType.Date,
+                Value = formatedDate
+            };
+
+---
+
+
+
+--WPF
+
+Бібліотека призначена щоб дати класи 
+
+Solution -> Create new Project -> Class Library
+
+
+Class Library - не запускається/його призначення зберігати класи які ми будемо використовувати
+
+
+виносимо class SportShopDb і Products.cs через ЛКМ у 03_ClassLibrary
+
+
+
+Solution -> Manage NuGet Packages
+Dependencies->Add Project References -> 03_ClassLibrary
+
+
+у 03_ClassLibrary Міняємо класи на public
+
+
+
+dll - dynamic link library
+
+набір класів який можне використовувати в консольних і віконних додатках
+
+
+
+Models -> містить всі класи
+
+SportShopDb -> міст який зв'язує проект і бд
+
+03_CRUDInterface -> просто main
+
+
+
+ <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Click="Button_Click">Load Products</Button>
+        </ToolBar>
+        <DataGrid Name="dataGrid"></DataGrid>	//таблиця
+ </DockPanel>
+
+
+dataGrid.ItemsSource = db.Read_Get_All();
+
+------------------------------------------------------------------------------------------
+04_LINQ To SQL
+
+internal - класс видно тільки в проекті
+
+Назва класу який звязаний з бд і має CRUD інтерфейс МАЄ бути приставка DB
+			|  міст між C# і БД
+
+
+
+connected mode - затратний		  |  Більше навантаження на сервер / Швидші зміни
+
+disconected mode - менш затратний |
+
+
+ Add new item -> LINQ to SQL Classes
+ 
+ View - > SQL Server Object Explorer -> Add SQL Server
+ 
+ ->  далі вибираємо у БД наші таблиці і тягнемо у меню -> потім жмемо ctrl+c (Таблиця стор з SQL у C#)
+ 
+ 
+System.Data.Linq.Table<Employee>   -  перетвор таблицю з дб у таблицю в C#
+
+
+
+
+
+
+Top(5) = Take(5)
+
+
+	//предикат | функція завданняс якої є взяти по черзі кожен Product і сказати true або false
+
+static bool FilteredPredicate(Product p)	//або (p => p.CostPrice > 1000)
+        {
+            return p.CostPrice > 1000;
+        }
+
+
+			якщо true, то буде додаватися в цю колекцію
+
+var mostValue = db.Products.Where(p => p.CostPrice > 1000)		//синтаксис методу
+                .OrderByDescending(p => p.CostPrice).Take(5);
+
+
+
+
+var mostValue = (from p in db.Products
+                         where p.CostPrice > 1000
+                         orderby p.Price descending			//синтаксис запиту
+                         select p).Take(5);
+
+
+
+ foreach (var p in mostValue)
+            {
+                Console.WriteLine($"Product: {p.Id,5}. {p.Name,-15} . {p.CostPrice}$ ");
+            }
+
+
+
+
+db.Products.InsertOnSubmit(product);	//вставляє об'єкт в колекцію але не в БД
+db.SubmitChanges();		//вставляє зміни у БД
+
+
+
+
+											//бо повертається 1 елем а Функція IQueryable
+  Product pr = db.Products.Where(p => p.Id == 3).FirstOrDefault();
+  
+            Console.WriteLine($"Product with id {pr.Id}. {pr.Name}. Price = {pr.CostPrice}");
+			
+            pr.CostPrice -= 16000;
+			
+            db.SubmitChanges();		//щоб зміни перенеслись у бд
+			
+	
+	
+			
+pr.CostPrice -= 16000;	// приходить на зміну чистому ADO.NET де все відбув через
+
+cmdText = "update Table Products where id='5'"  ТА		
+								SqlCommand commad = new SqlCommand(cmdText, connectionString)  // і ТД.....
+								
+								
+щоб створити Linq to Entities треба
+
+
+VS installer -> Modify Visual Studio 2022 -> Individual Components -> sql -> 
+
+ ✅ SQL Server Data Tools		//на базі VS studio створиться Local Server					
+ ✅ SQL Server Express 2019 LocalDB
+
+	Code Tools
+ 
+ ✅ LINQ to SQL tools		//Файл який дозволив по діаграмі(ctrl+c) створити БД				
+								
+								
+					
+					
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================								
+ /$$$$$$$$             /$$     /$$   /$$                     /$$$$$$$$                                                                           /$$      
+| $$_____/            | $$    |__/  | $$                    | $$_____/                                                                          | $$      
+| $$       /$$$$$$$  /$$$$$$   /$$ /$$$$$$   /$$   /$$      | $$     /$$$$$$  /$$$$$$  /$$$$$$/$$$$   /$$$$$$  /$$  /$$  /$$  /$$$$$$   /$$$$$$ | $$   /$$
+| $$$$$   | $$__  $$|_  $$_/  | $$|_  $$_/  | $$  | $$      | $$$$$ /$$__  $$|____  $$| $$_  $$_  $$ /$$__  $$| $$ | $$ | $$ /$$__  $$ /$$__  $$| $$  /$$/
+| $$__/   | $$  \ $$  | $$    | $$  | $$    | $$  | $$      | $$__/| $$  \__/ /$$$$$$$| $$ \ $$ \ $$| $$$$$$$$| $$ | $$ | $$| $$  \ $$| $$  \__/| $$$$$$/ 
+| $$      | $$  | $$  | $$ /$$| $$  | $$ /$$| $$  | $$      | $$   | $$      /$$__  $$| $$ | $$ | $$| $$_____/| $$ | $$ | $$| $$  | $$| $$      | $$_  $$ 
+| $$$$$$$$| $$  | $$  |  $$$$/| $$  |  $$$$/|  $$$$$$$      | $$   | $$     |  $$$$$$$| $$ | $$ | $$|  $$$$$$$|  $$$$$/$$$$/|  $$$$$$/| $$      | $$ \  $$
+|________/|__/  |__/   \___/  |__/   \___/   \____  $$      |__/   |__/      \_______/|__/ |__/ |__/ \_______/ \_____/\___/  \______/ |__/      |__/  \__/
+                                             /$$  | $$                                                                                                    
+                                            |  $$$$$$/                                                                                                    
+                                             \______/                                                                                                     							
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================								
+
+
+
+Entity Framework Conspect
+
+
+----------------------------------------------
+01_IntroToEntityFramework
+
+Entity Framework - підхід що дасть насписати код по якому згенерує БД
+
+
+ORM - Object Relational Mapping
+
+	Mapping (Переконвертовує данні з БД у класс)
+
+
+			model-workflow	
+			
+	*Database First(по ДБ класи)
+ 
+Existing Database	---->	Generated Data Model (.edmx)
+
+
+	*Model First(По схемі БД)
+	
+Data Model (.edmx)	---->	Generated Database
+
+
+	*Code First(По коду БД)
+	
+Data Model (classes) ---->	Generated Database
+or
+Existing Database	---->	Generated Data Model (classes)
+
+
+ Назва класу який звязаний з бд і має CRUD інтерфейс МАЄ бути приставка DB,DBContex
+			|  міст між C# і БД
+			
+			
+			
+			==Code First==
+			
+			
+ class Airplane
+}
+	
+	public int Id { get; set; }
+	
+	private string Model { get; set; }
+	
+	private int MaxPassangers { get; set; }
+	
+	
+	/////Relational Type: Flight ---Airplane (1....*)
+	
+	public ICollection<Flight> Flights { get; set; }
+}
+
+ class Flight
+{
+	
+	public int Id { get; set; }
+	
+	private string ArrivalCity { get; set; }
+	
+	private string DepartureCity { get; set; }
+	
+	private DateTime DepartureTime { get; set; }
+	
+	private DateTime ArrivalTime { get; set; }
+	
+	
+	/////Relational Type: Flight ---Airplane (1....*)
+	
+	public Airplane Airplane { get; set; }
+	public int AirplaneId { get; set; }
+}
+
+
+
+ Щоб зробити зв'язок one to many
+ 
+у Flight створ вказівник на літак	( public Airplane Airplane { get; set; } ) 
+
+а у Airplane колекцію Flight	( public ICollection<Flight> Flights { get; set; } )
+
+ *Крім цього створ додаткове поле у Flight для зручності :	public int AirplaneId { get; set; }
+ 
+
+
+	Щоб зробити зв'язок many to many
+	
+у Client створ вказівник на літак	( public ICollection<Flight> Flights { get; set; } ) 
+
+а у Flight колекцію Flight	( public ICollection<Client> Clients { get; set; } )	
+	
+	
+		==== C# to SQL ====
+		
+		✅	Microsoft.EntityFrameworkCore
+
+		
+public DbSet<Client> Clients { get; set; }	- проперті який 
+			у момент mapping перетвор дані на таблицю	
+	
+	  DbSet<>	- клас який у C# зберігає колекцію а у БД таблицю	
+	
+	
+public DbSet<Flight> Flights { get; set; }
+
+public DbSet<Airplane> Airplanes { get; set; }	
+	
+	
+	
+internal class AirportDbContext: DBContext{....		- клас зв'язується з БД | дає класу методи для роботи з БД
+...
+}
+
+
+потім в main створ екземпляр від якого є методи
+
+
+context.Client.Add(new Client(){
+	Name = ...
+});
+context.SaveChanges();	// те саме що і db.SubmitChanges();	
+
+
+		====CONNECTION====
+			
+	✅	Microsoft.EntityFrameworkCore.SqlServer
+
+
+ protected OVERRIDE void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-1LCG8OH\SQLEXPRESS;
+                                        Initial Catalog = PD_411_Airport;
+                                        Integrated Security=True;
+                                        Connect Timeout=5;
+                                        Encrypt=False;Trust Server Certificate=False;
+                                        Application Intent=ReadWrite;Multi Subnet Failover=False");
+        }
+
+
+
+
+public AirportDbContext()
+        {
+           this.Database.EnsureDeleted();	//Delete БД
+
+           this.Database.EnsureCreated();	//Create БД
+        }
+		
+		
+		==== C# to SQL ====
+		
+		
+Якщо назва проперті має Id/id/ID NameId то при DbSet<> ці поля будуть Primary Key
+
+Якщо назва проперті має Name+Id то при DbSet<> ці поля будуть Foreign Key
+
+
+Value - not null	Reference - nullable
+
+
+ public DateTime? Birthdate { get; set; }	[ ? ] not null --> null 
+ 
+Щоб вносити змінити як у SQL використ DataAnnotations:
+	
+	[Required] 				//not null
+	[MaxLength(Number)]		//nvarhcar(Number)
+	[Key]  					//Primary Key
+	[Column("FirstName")]  	//as 'FirstName'
+	
+	
+	
+автоматично створ	
+
+		create table ClientFlight			//проміжна таблиця
+(
+	ClientId int not null references Teachers (Id), -- 1 1 1 2 7 2 5	1..20
+	FlightsNumber int not null references Groups (Id),	 -- 4 3 5 4 4 3 4 	1...20
+	
+	-- складений первинний ключ
+	primary key (ClientId, FlightsNumber)	//перевіряє комбінації на дублікат
+)
+
+
+OnModelCreating - insert дані у таблицю при створенні БД
+	Вказ тільки основні поля
+
+        protected OVERRIDE void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Airplane>().HasData(new Airplane[]
+          {
+                new Airplane()
+                {
+                     Id = 1,
+                     Model = "Boeing747",
+                     MaxPassangers = 200
+                },
+                 new Airplane()
+                {
+                     Id = 2,
+                     Model = "Boeing748",
+                     MaxPassangers = 200
+                }
+
+          });
+            modelBuilder.Entity<Flight>().HasData(new Flight[]
+            {
+                new Flight()
+                {
+                     Number = 1,
+                     ArrivalCity = "Lviv",
+                     DepartureCity = "Kyiv",
+                     ArrivalTime = new DateTime(2025,9,21),
+                     DepartureTime = new DateTime(2025,9,21),
+                     AirplaneId = 1                    
+                },
+                 new Flight()
+                {
+                     Number = 2,
+                     ArrivalCity = "Lviv",
+                     DepartureCity = "Odessa",
+                     ArrivalTime = new DateTime(2025,9,22),
+                     DepartureTime = new DateTime(2025,9,22),
+                     AirplaneId = 2
+                }
+
+            });
+        }
+		
+		
+		
+Client cl = context.Clients.Find(1);
+ 
+            Console.WriteLine($"{cl.Name}  {cl.Email} {cl.Birthdate.ToString("yyyy-MM-dd")} ");
+
+            if(cl != null)
+            {
+                context.Clients.Remove(cl);
+                context.SaveChanges();  
+            }
+			
+			
+----------------------------------------------
+02_EF_Migrations
+
+
+при many to many EF автоматично створить проміжну таблицю
+
+ можна для зручності створити її самому Щоб зробити вивід без join
+ 
+ 
+entities -  класи які зв'язуються з БД
+
+
+		треба поставити
+	
+	✅	Microsoft.EntityFramework Core.Tools
+
+migration - можливість по коду стоврити БД при змінах вона записує їх і
+		порівнює SQL з C#
+
+
+
+потім у консолі в tools -> NuGet Package Manager -> Package Manager Console
+
+	пишемо комнду:	 add-migration MigrationName
+
+	update-database 	--> 	застосувати зміни
+	
+	Remove-Migration 	-->		видалити міграцію
+	
+	
+migration - можливість гуманним методом оновити/створити БД БЕЗ ВИДАЛЕННЯ існуючої інформації
+
+
+			Більше не потрібні
+			
+		this.Database.EnsureDeleted();	
+		this.Database.EnsureCreated();
+		
+		
+проміжна таблиця допомагає вже заповнити данні		
+		
+----------------------------------------------
+03_EF_ Fluent API
+
+Fluent API - можливості винести Data anottations в одне місце
+	дає можливість налаштувати зв'язки (як яка проперті прив'язана)
+	
+
+
+
+modelBuilder. Entity<Airplane>(). HasKey(a => a.Id); 	//primary key (робить поле первинним ключем)
+modelBuilder. Entity<Airplane>().ToTable("Plane");		//Table Name (дає назву таблиці)
+														Table("Plane")
+
+
+
+		=бере літака у якого проперті Model=
+ 1	modelBuilder. Entity<Airplane>().Property(a => a.Model)		//найкращий
+ 2	modelBuilder. Entity<Airplane>().Property("Model")
+ 3	modelBuilder. Entity<Airplane>().Property(nameof(Airplane.Model))		
+
+
+    до проперті c.Name замість
+ [Required,MaxLength(150),Column("Plane")]
+
+
+ modelBuilder.Entity<Airplane>()
+ .Property(a => a. Model)
+ .HasMaxLength(100)		// MaxLength(100)
+ .IsRequired();			// Required
+
+
+ modelBuilder. Entity<Client>()
+ .Property(c=>c.Name)
+ .IsRequired()
+ .HasMaxLength(150)
+ .HasColumnName("FirstName");	//Column("Plane")
+
+
+
+ .HasKey(a => a.Id);   				[Key]
+ .ToTable("Plane");					[Table("Plane")]	
+ 
+  .HasMaxLength(100)				[MaxLength(100)]
+  .IsRequired();					[Required]
+  .HasColumnName("FirstName");		[Column("Plane")]
+
+
+
+
+
+					Relationship navigations
+
+	==прив'язує Clients до Flights many to many==
+				конкретизує до якої властивості прив'язати
+		
+--пишеться щоб правильніше побудувалась таблиця і взяла ті проперті
+		У класах колекції елем на елем залишаємо
+		
+		
+		//many to many	*...........*
+		
+modelBuilder. Entity<Flight>()
+ .HasMany(f => f.Clients)
+ .WithMany (c => c.Flights);
+
+
+		//one to many 	1..................*
+			//літак має * польотів а політ 1 літак
+		
+modelBuilder. Entity<Flight>()
+ .HasOne(f => f. Airplane)
+ .WithMany (a=>a.Flights)
+ .HasForeignKey(f=> f. AirplaneId);
+
+
+
+
+
+
+					Seeder
+
+для зручності виносимо в інший клас DbInitializer
+	і створ папку Helpers
+	
+
+	Seeder	-  той самий  OnModelCreating(ModelBuilder modelBuilder)
+
+
+Для кожної ініціалізації класу створ нову функцію 
+
+
+	додаємо THIS і STATIC шоб зробити extension 
+			і у DbContext викликати modelBuilder.SeedFlights();
+				
+
+	static class DbInitializer {
+
+
+ public static void SeedAiplanes(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Airplane>().HasData(new Airplane[]
+            {
+			new Airplane(){ ......}
+			}
+		}
+		
+		
+   public  static void SeedFlights(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Flight>().HasData(new Flight[]
+           {
+                new Flight() {.....}		
+		   }
+		}
+
+}
+
+----------------------------------------------
+04_EF_Loading Data
+
+
+ Visual Studio Installer - > ✅ Class Designer	//щоб на основі БД була діаграма
+
+
+
+Типи підгрузок
+	1 явний Join - Проміжна таблиця
+	2 явна підгрузка до 1 параметра
+
+
+	Console.WriteLine($"{cl?.Name}  {cl?.Email} - якщо об'єкт буде null то воно його виведе без помилки
+
+
+JOIN - load data Include(relation data)		//(relation data) - тип данних який підтягуємо
+
+
+var flight = context.Flights
+	.Include(f => f. Airplane)				//JOIN
+	.Where(f => f. ArrivalCity == "Lviv")
+	.OrderBy(f=> f. DepartureTime);
+
+
+foreach (var f in flight)
+ {
+ 	Console.WriteLine($"Arrival city {f.ArrivalCity}
+ 		$"Departure city: {f.DepartureCity}\n" +
+ 		$"Departure time: {f.Departure Time. ToShortDateString()}\n" +
+ 		$"Airplane: {f.AirplaneId} {f.Airplane.Model}");
+ }														при Include буде працювати
+							без виводитиме Null object not set
+
+
+
+
+ .Include(f => f. Airplane)	//Підгрузка 
+					абсолютно всіх данних з таблиці Airplane до всіх Flight
+						
+
+
+
+	//Явна підгрузка | підгрузка до конеретного об'єкта
+	
+ --Explicit loading data : Context.Entry(entity).Collection/References.Load()
+												
+								Collection - для ICollection<>
+								References - для Посилання на 1 об'єкт
+
+
+
+Client cl = context.Clients.Find(3);
+
+
+ context.Entry(cl).Collection(cl => cl.Flights).Load();	
+	
+	Entry(cl) - Вказ для якого об'єкта конкретно підгружаються данні
+	
+	
+DataAccess 	
+	або
+data library - клас не запускає консоль краще для користувача
+
+  повинен мати все що стоується роботи з БД (Entities,Helpers,Migrations)
+
+----------------------------------------------
+05_EF_OneToOne
+
+one to one - самий складний і неприродній зв'язок для БД
+
+при цьому зв'язку визначаємо яка таблиця буде головною а яка залежною
+
+
+	//залежна
+public class Credential	{
+...
+public Client Client { get; set; }	//null
+public int ClientId { get; set; }	//null
+	}
+
+	//основна бо ( int? )
+public class Client	{
+...
+public Credential Credential { get; set; }	//null
+public int? CredentialId { get; set; }	//not null
+	}
+
+
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================								
+  /$$$$$$                        /$$                                                                          
+ /$$__  $$                      | $$                                                                          
+| $$  \__/ /$$   /$$  /$$$$$$$ /$$$$$$    /$$$$$$  /$$$$$$/$$$$                                               
+|  $$$$$$ | $$  | $$ /$$_____/|_  $$_/   /$$__  $$| $$_  $$_  $$                                              
+ \____  $$| $$  | $$|  $$$$$$   | $$    | $$$$$$$$| $$ \ $$ \ $$                                              
+ /$$  \ $$| $$  | $$ \____  $$  | $$ /$$| $$_____/| $$ | $$ | $$                                              
+|  $$$$$$/|  $$$$$$$ /$$$$$$$/  |  $$$$/|  $$$$$$$| $$ | $$ | $$                                              
+ \______/  \____  $$|_______/    \___/   \_______/|__/ |__/ |__/                                              
+           /$$  | $$                                                                                          
+          |  $$$$$$/                                                                                          
+           \______/                                                                                           
+ /$$$$$$$                                                                              /$$                    
+| $$__  $$                                                                            |__/                    
+| $$  \ $$ /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$  /$$$$$$/$$$$  /$$$$$$/$$$$  /$$ /$$$$$$$   /$$$$$$ 
+| $$$$$$$//$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$|____  $$| $$_  $$_  $$| $$_  $$_  $$| $$| $$__  $$ /$$__  $$
+| $$____/| $$  \__/| $$  \ $$| $$  \ $$| $$  \__/ /$$$$$$$| $$ \ $$ \ $$| $$ \ $$ \ $$| $$| $$  \ $$| $$  \ $$
+| $$     | $$      | $$  | $$| $$  | $$| $$      /$$__  $$| $$ | $$ | $$| $$ | $$ | $$| $$| $$  | $$| $$  | $$
+| $$     | $$      |  $$$$$$/|  $$$$$$$| $$     |  $$$$$$$| $$ | $$ | $$| $$ | $$ | $$| $$| $$  | $$|  $$$$$$$
+|__/     |__/       \______/  \____  $$|__/      \_______/|__/ |__/ |__/|__/ |__/ |__/|__/|__/  |__/ \____  $$
+                              /$$  \ $$                                                              /$$  \ $$
+                             |  $$$$$$/                                                             |  $$$$$$/
+                              \______/                                                               \______/                                                                                                      							
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================	
+
+
+---------------------------------------------------------------
+01_SP - Intro to System Programming. Processes
+
+async - await //Головна мета
+
+процес - програма яка запускається
+
+
+base priority - визначає кому більше дати процесорного часу
+
+псевдо паралельність - виконання багатьох процесів частково
+
+
+using System.Diagnostics; // for working with processes
+
+
+ Process.Start("Chrome.exe", "stackoverflow.com google.com");
+	
+
+	close - proceses = null
+	closeMainWindow - гуманно закриває alt+f4
+	kill - як через task manager
+
+
+grid.ItemSource = Process.GetProcesses();	//викликає функцію GetProcesses
+
+grid.SelectedItem as Process	// Бере виділений елемент як процес
+
+---------------------------------------------------------------
+02_SP - Threads
+
+
+---
+WPF
+
+InitializeComponent - Створ Main Window
+
+---
+
+
+using System.Threading;		//for threads
+
+
+
+Thread - потік додатковий класи який дає C#
+
+
+										void Функція									
+ThreadStart threadstart = new ThreadStart(Method);
+
+Thread thread = new Thread(threadstart);
+thread.Priority ThreadPriority.Normal;
+
+
+	або зразу 
+
+Thread thread = new Thread(Method);
+
+
+thread.Start()	- Буде виконуватись ця ф-ція і main
+
+
+ThreadStart - нічого не передаємо
+ParameterizedThreadStart - приймає obj
+
+
+ static void ThreadFunc(object? a)
+         {
+ 
+             string ID = (string)a;
+             for (int i = 0; i < 100; i++)
+             {
+                 Console.WriteLine(ID + " " + i);
+                 //Console.ReadKey();
+                 Thread.Sleep(100);
+             }
+         }
+
+Thread thread1 = new Thread(ThreadFunc);
+            thread1.Start((object)"One");	//потік з параметром
+
+
+	t.IsBackground = true
+	
+ другорядний потік закривається коли закривається Основний
+
+	
+	t.Abort(); //перервати потік
+
+
+
+ParameterizedThreadStart ts = new ParameterizedThreadStart(Method);
+
+	Thread t1 new Thread(ts);
+	Thread t2 = new Thread(ts);
+
+t1. Priority=ThreadPriority.Lowest;
+t2. Priority=ThreadPriority.Highest;
+
+  t1.Start((object)"t1: Lowrst")
+
+
+	t.Join	//чекає поки потік не закінчиться і потім продовжує Main
+
+
+			-Thread in wfp-
+
+private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            thread = new Thread(HardWork);	
+            thread.Start();		//стовр новий потік щоб вікно не фрізилось
+        }
+
+   private void HardWork()
+   {
+       bool isContinue = false;
+      Application.Current.Dispatcher.Invoke(new Action(() =>	//з потоку програми переключ на вікно
+        {
+			if (progress.Value > 0)
+				progress.Value = progress.Minimum;
+			isContinue = progress.Value < progress.Maximum;
+        }));
+	   
+       while (isContinue)
+       {
+            Application.Current.Dispatcher.Invoke(new Action(() =>		//так само доступаємось до потоку
+           {
+				progress.Value++;
+				isContinue = progress.Value < progress.Maximum;
+           }));
+           Thread.Sleep(110);
+		   
+		} 
+		   
+		   
+Tuple<int, int> tuple = new Tuple<int, int>(5, 6);	--пара для передачи 2 аргументів у функцію
+
+---------------------------------------------------------------
+03_SP - Thread Synchronization
+
+
+threads[i].Join() - чекає коли закінчаться потоки і потім об'єднує їх 
+
+
+	 static void Function()
+        {
+            for (int j = 1; j <= 1_000_000; ++j)
+            { ++Counter.count; Thread.Sleep(500); }
+        }
+        static void Main(string[] args)
+        {
+
+           
+            Thread[] threads = new Thread[5];
+				for (int i = 0; i < threads.Length; ++i)
+				{
+					threads[i] = new Thread(() => {				//як new Thread(Function)
+						for (int j = 1; j <= 1_000_000; ++j)
+						{ Counter.count++; }
+					});
+					threads[i].Start();
+				}
+            for (int i = 0; i < threads.Length; ++i)
+                threads[i].Join();
+
+            Console.WriteLine("counter = {0}", Counter.count);	///малоб бути 5_000_000
+
+
+Аде потоки перебивають один одного 	-- вихід Inter locker
+									ставить замок поки потік використ змінну
+
+
+	Thread[] threads = new Thread[5];
+            for (int i = 0; i < threads.Length; ++i)
+            {
+                threads[i] = new Thread(delegate ()
+                {
+                    for (int j = 1; j <= 1_000_000; ++j)
+                    {
+
+                        Interlocked.Increment(ref Counter.count);
+                    }
+                });
+                threads[i].Start();
+            }
+
+	
+		
+		Види Interlocked:
+		
+ public static Int32 Increment(ref Int32 location); – увеличивает значение на 1;
+	public static int Decrement(ref int location); – уменьшает значение на 1;
+	
+public static int Add(ref int location, int value); – увеличивает/уменьшает значение на value;
+	public static int Exchange(ref int locationi, int value); – обменивает параметры значениями;
+	
+	public static int CompareExchange(ref int location, int value, int comparand) – сравнивает location и comparand и присваивает location value в случае успеха.
+
+
+
+
+
+interlocked - ставить замок на змінну коли потік її використовує
+
+Interlocked.Increment (ref Counter.count); - для 1 змінної
+
+
+lock(this) - ставить замок на всі змінні классу
+
+	
+	for (int i = 0; i < 1_000_000; ++i)
+                {
+                    // this - pointer вказівник на змінні классу
+                    lock (this)
+                    {
+                        
+														//Interlocked.Increment(ref number);//Interlocked не підійде бо працює з 1 змінною
+                        ++number;
+                        if (number % 2 == 0)//---------------------------
+																				//Interlocked.Increment(ref evenNumbers);
+                            ++evenNumbers;=
+                    }
+                }
+
+
+
+					-lock для статичного классу-
+					
+static немає this тому
+
+	
+lock (typeof(StaticLockCounter))	//StaticLockCounter - назва классу
+{
+	++fieldl;
+	if (field1 % 2 0)
+	++field2;
+}|
+
+
+
+---------------------------------------------------------------
+04_SP - Tasks
+
+	using System.Threading.Tasks;
+
+
+TPL - Task Parallel Library	//default using
+
+
+CancellationToken - дозволяє перервати task
+delegate void()	-- те саме що ()
+
+Action - делегат	void()
+
+
+ Task task4 = new Task( ()=> {
+ 	Console.WriteLine("Початок роботи метода Display");
+ 	Console.WriteLine("Завершення роботи метода Display");
+ });
+task4.Start();
+
+	-або-
+	
+ Task task4 = new Task(Display);
+task4.Start();
+	
+
+	//start automatically
+	
+Task task2 Task.Factory.StartNew(() =>
+	Console.WriteLine($"Task 2 is executed in Thread: " +
+	$"{Thread.CurrentThread. Managed ThreadId}"
+));
+
+		
+
+
+		
+		Самий поширений(static об'єкт класу не потрібен)
+
+ Task task3 = Task.Run(() =>
+}
+	Console.WriteLine($"Task 3 is executed in Thread: {Thread.Cur
+});
+
+
+
+
+
+task.Wait(); // waiting (freeze)
+	як Thread.Join()
+
+
+	tasks - масив task
+
+Task.WaitAll(tasks)	//чекаємо поки закінчатьтся всі task
+
+Task.WaitAny(tasks)	//чекаємо поки закінчатся 1 task
+
+
+
+
+Thread	- вузький функціонал	Нічого не повертає
+Task - більший функціонал		Повертає
+
+
+
+
+ Task task1 = new Task(() => {
+	Console.WriteLine($"Task Id: {Task.CurrentId}");
+	Thread.Sleep(1000);
+ });
+ 
+Task task2 = task1.ContinueWith(Display)
+	.ContinueWith(Display2);	- створ послідовність методів
+
+	task1.Start()	//запустить ланцюг ф-цій
+
+
+
+
+
+	--типізована task яке повертає і приймає int
+Task<int> t = new Task<int>(() => Factorial(5));	
+
+			() => Factorial(5)		//void лямбда вираз який нічого не приймає і не повертає
+								всередені алгоритму якого лежить метод Factorial
+
+
+t.Start()
+
+	//t.Wait()	-- необов'язково бо task1.Result == taskl.Wait();
+
+t.Result()	// проперті яка покаже знач з ф-ції
+
+
+
+--ContinueWith(Summ); - приймає PREVIOUS taks
+
+	static int Summ(Task<int> prevTask)
+{
+	int summ = prevTask.Result * 2;
+	Console.WriteLine(summ);
+	return summ;
+}
+
+Task<int> t = task1.ContinueWith(Summ);
+
+Console.WriteLine(t.Result);
+
+
+
+			--Outer 	Inner-
+			
+
+var outer Task. Factory. StartNew(()	// outer task
+ {
+	Console.WriteLine("Outer task starting...");
+		var inner = Task. Factory. StartNew(() => // inner task
+		{
+			Console.WriteLine("Inner task starting...");
+			Thread.Sleep(2000);
+			Console.WriteLine("Inner task finished.");
+			
+		}, TaskCreationOptions.Attached To Parent);		//спочатку виконається outer потім inner
+														// без неї рандомно
+	
+	/), TaskCreationOptions. Attached To Parent);		
+	//inner.Wait();//freez
+		
+	Console.WriteLine("Outer task ending...");
+	
+ });
+outer.Wait(); 						// waiting outer task
+Console.WriteLine("End of Main");
+Console.ReadLine();
+
+
+inner треба outer -- тільки щоб він його створив
+
+
+---------------------------------------------------------------
+05_SP - Async/Await
+
+
+ItemSource - для незмінної колекції
+
+ListBox - клас для виведення данних
+list.Items.Add(value);
+
+
+<ProgressBar DockPanel. Dock="Bottom" Value="20" Height="15" 
+IsIndeterminate="True"	- прогрес бар рухаєтсья
+	>	</ProgressBar>
+
+
+
+		//розбив функціїї на потоки
+
+private void Button_Click(object sender, RoutedEventArgs e)
+{
+	Task<int> task Task. Run(GenerateNumber);
+	//int value = task.Result;	-- заморожує програму
+	//list.Items.Add(value);
+}		
+
+
+	/прапорець на метод щоб компілювався по особливому
+Async	-  дозволено await | метод розділяється на 2 частини до await(зразу) і після(чекати)
+(послідовне без заморозки)
+
+
+
+
+
+
+	await	-	чекає task без freeze
+
+
+int value = await task;	 --не заморожує додаток коли чекає результат
+		//повертає task.Result
+
+
+
+СУТЬ ASYNC METHODS - ПОВЕРТАЮТЬ TASK
+	всі async повертають Task<T>
+
+
+			Async - у ф-ції створ task
+Task<int> GenerateNumberAsync()
+{
+	return Task.Run(()=>
+	{
+		Thread.Sleep(random.Next(5000));
+		return random. Next(1000);
+	});
+}
+
+
+
+	list.Items.Add(await Generate NumberAsync());
+
+---------------------------------------------------------------
+06_SP - Open File Dialog
+ 
+ асинхронно - послідовно без freeze
+ 
+ <TextBox IsReadOnly = "True" 		--не дає писати
+		><TextBox/>
+ 
+ 
+ <Window.Resources>		-- тег у якому можна задати стилізацію
+ 
+        <Style TargetType="{x:Type Button }">	--стилізація для кнопок
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="Background" Value="LightBlue"></Setter>            
+        </Style>
+		
+        <Style TargetType="{x:Type TextBox }">	--стилізація для полів вводу
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+ 
+ 
+ 
+ 
+ 
+	//тільки з файлами(старий варіант)
+OpenFileDialog fileDialog = new OpenFileDialog();
+
+ if (fileDialog.ShowDialog() == true) 
+            {
+                MessageBox.Show(fileDialog.FileName);
+				
+                model.Source = sourceTb.Text = fileDialog.FileName;
+  }
+ 
+ 
+ 
+		для кращої версії(файли+папки)
+ 
+ 
+	✅	Microsoft-WindowsAPICodePack-Shell
+ 
+ using MicrosoftWindowsAPICodePack.Dialogs;
+ 
+ 
+CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+ dialog. IsFolderPicker = true;		--для роботи з папками(але не файл)
+
+
+ 
+ 
+ 
+return Task - треба для await	наприклад:
+ 
+await CopyAsync(from.Text, to. Text);
+MessageBox.Show("Копіювання завершено!");
+ 
+ 
+без return Task у CopyAsync MessageBox не вивведеться
+ 
+ 
+
+	[AddINotifyPropertyChangedInterface]	- повідомляє вікно про те що код помінявся
+class ViewModel
+    {
+        public string Source { get; set; }
+        public string Destination { get; set; }
+        public float Progress { get; set; }
+        public bool IsWaiting => Progress == 0;
+    }
+ 
+ 
+ViewModel model = new ViewModel();	-- class який прив'язує вікно з кодом(вікно бачитиме усі проперті)
+ 
+ 
+у конструкторі MainWindow:
+this.DataContext = model;	//прив'язали вікно з кодом
+ 
+ 
+Value="{Binding Progress}"	--прив'язали value з проперті
+ 
+ 
+View model 	- класс який зв'язує вікно з кодом
+ 
+
+щоб при зміні value у коді змінювалася і UI	
+	
+	
+	✅PropertyChanged.Fody
+
+using PropertyChanged;
+
+
+			//асинхронне копіювання + збільшення progressbar
+
+	private Task CopyFileAsync(string src, string dest)
+        {
+            return Task.Run(() =>
+            {
+               
+                using FileStream srcStream = new FileStream(src, FileMode.Open, FileAccess.Read);
+                using FileStream desStream = new FileStream(dest, FileMode.Create, FileAccess.Write);
+                byte[] buffer = new byte[1024 * 8];//8Kb
+                int bytes = 0;
+                do
+                {
+                    bytes = srcStream.Read(buffer, 0, buffer.Length);
+                    desStream.Write(buffer, 0, bytes);
+
+                    float percentage = desStream.Length / (srcStream.Length / 100);   
+                    model.Progress = percentage;    
+
+
+                } while (bytes > 0);
+          
+  
+            });
+            
+        }
+
+	
+	
+==	
+
+Stackpanel - дозвол створювати об'єкти всередині його і всі вони будуть на 100% ширини Stackpanel
+як сітка тільки об'єкти не розташовуються 1 під одним а вертикально (зверху вниз)
+
+Border - тег створює білу панель посередині вікна — «картку», на якій усе розташовано.
+==	
+---------------------------------------------------------------
+07_SP - Copy File Manager
+
+
+<DockPanel
+LastChildFill="True">	- останній елем займе все місце що залишилось
+
+<ListBox>
+<ListBoxItem>	-	може мітсити тільки один об'єкт
+
+
+якщо потрібно щось динамічно додавати/показувати треба зробити в коді колекцію а потім її забіндити
+
+==
+ щоб напряму працювати з Listbox створ list, list<CopyProcessecInfo>  proceses = new List<CopyProcessecInfo>
+	де CopyProcessecInfo клас зі змінними для ListBox (filename,percentage)
+
+[AddINotifyPropertyChangedInterface]	-	повідомляє вікно про зміни	
+    class CopyProcessecInfo
+    {
+        public string Filename { get; set; }
+        public float Percentage { get; set; }
+    }
+
+
+але цей ліст приватний тому робимо  проперті IEnumerable і присвоюємо їй list
+
+	 public IEnumerable<CopyProcessecInfo> Processes => processes;	//get - readonly
+	
+	та ініціалізуємо в конструкторі
+		public ViewModel()
+	{
+		processes = [];
+	}
+	
+	
+і біндимо ListBox	<ListBox ItemsSource="{Binding Processes}" .....	
+	
+
+додаємо зміни у CopyBtn і CopyFileAsync
+
+
+	 private async  void CopyBtn(object sender, RoutedEventArgs e)
+        {
+           ....
+            string filename = Path.GetFileName(model.Source);
+           
+							//add to list item
+							
+            CopyProcessecInfo info = new CopyProcessecInfo()
+            {
+                Filename = filename,
+                Percentage = 0
+            };
+   model.AddProcess(info);	-- додає Item у Listbox
+														//додаємо
+            await CopyFileAsync(model.Source, destFilename, info);
+           }
+
+
+														//додаємо
+ private Task CopyFileAsync(string src, string dest, CopyProcessecInfo info)
+        {
+            return Task.Run(() =>
+            {
+             ...
+                 info.Percentage = percentage;   
+				...}
+		}
+
+у класі ViewModel додаємо функція яка додає Item у List
+
+	public void AddProcess(CopyProcessecInfo info)
+			{
+				processes.Add(info);	- додає елем у list<CopyProcessecInfo>
+			}
+		
+*Але ListBox не обновляється для нових об'єктів тому заміняємо 	list<CopyProcessecInfo> на ObservableCollection<CopyProcessecInfo>
+	
+		
+ObservableCollection	-	колекція яка динамічно повідомляє вікно про зміни	
+
+
+<ListBox.ItemTemplate> - прописуємо як виглядатиме 1 елемент
+
+
+
+
+<ListBox.ItemTemplate>	-	як ToString() | допомог вивести інформацію 
+	<DataTemplate>
+		<ListBoxItem>
+		
+		<Grid>	- для кращового виводу
+		
+             <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="Auto" MaxWidth="100"></ColumnDefinition>
+                 <ColumnDefinition Width="Auto" MaxWidth="100"></ColumnDefinition>
+                 <ColumnDefinition Width="*"></ColumnDefinition>
+             </Grid.ColumnDefinitions>
+												//назва прив'яз до фалу
+             <TextBlock Grid.Column="0" Text="{Binding Filename}"
+                        Margin="5" TextTrimming="WordEllipsis"></TextBlock>		-- TextTrimming="WordEllipsis" обрізає текст
+						
+             <TextBlock Grid.Column="1"  Margin="5" > 		-- як  Console.WriteLine("asd" + "b")
+                <Run Text="{Binding Percentage}"></Run>	% 		виведе сам процент і допише %
+             </TextBlock>
+         
+             
+             <ProgressBar Grid.Column="2" Value="{Binding Percentage}"></ProgressBar>
+         </Grid>
+		 
+		</ListBoxItem>
+	</DataTemplate>
+</ListBox.ItemTemplate>
+
+
+=
+
+
+<TextBlock Grid.Column="1" Margin="5" >
+<Run Text="{Binding Percentage)"></Run>%	-	виводить проценти+%
+</TextBlock> 	
+
+TextTrimming="WordEllipsis"	- обрізає текст
+
+
+ObservableCollection - list який дивиться чи змінився код і повідомляє вікно
+
+---------------------------------------------------------------
+08_SP - Parallel
+
+Parallel.For(1, 20, Factorial) - замість циклу з потоками
+			але	Factorial(int a) -- обов'язкова має мати аргумент
+			
+
+	for (int i = 1 i++) i <= 20
+	{
+		Task.Run(()=> Factorial(i));
+	{
+
+
+			//list - IEnumerable collection
+Parallel.ForEach(list, Factorial);
+
+
+Parallel.ForEach - як парарельний foreach
+
+
+DateTime start = DateTime.Now;
+ParallelLoopResult result = Parallel.ForEach(authors, AverageRating);
+ if (result. IsCompleted)
+ {
+ 	Console.WriteLine("Duration: "+ (DateTime.Now start). TotalSeconds);
+ 	Console.WriteLine("All Tasks had completed!");
+ }
+
+
+CancellationToken - зупиняє Task
+
+							//розділяє на потоки LINQ
+var factorials from n in numbers.AsParallel()
+	where n > 0
+	orderby n
+	select Factorial(n);
+
+foreach (var n in factorials)
+	Console.WriteLine("\t\t" + n);
+
+
+.AsParallel() - паралельний LINQ
+
+
+
+
+
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================								
+ /$$   /$$             /$$                                       /$$                                          
+| $$$ | $$            | $$                                      | $$                                          
+| $$$$| $$  /$$$$$$  /$$$$$$   /$$  /$$  /$$  /$$$$$$   /$$$$$$ | $$   /$$                                    
+| $$ $$ $$ /$$__  $$|_  $$_/  | $$ | $$ | $$ /$$__  $$ /$$__  $$| $$  /$$/                                    
+| $$  $$$$| $$$$$$$$  | $$    | $$ | $$ | $$| $$  \ $$| $$  \__/| $$$$$$/                                     
+| $$\  $$$| $$_____/  | $$ /$$| $$ | $$ | $$| $$  | $$| $$      | $$_  $$                                     
+| $$ \  $$|  $$$$$$$  |  $$$$/|  $$$$$/$$$$/|  $$$$$$/| $$      | $$ \  $$                                    
+|__/  \__/ \_______/   \___/   \_____/\___/  \______/ |__/      |__/  \__/                                    
+                                                                                                              
+                                                                                                              
+                                                                                                              
+ /$$$$$$$                                                                              /$$                    
+| $$__  $$                                                                            |__/                    
+| $$  \ $$ /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$  /$$$$$$/$$$$  /$$$$$$/$$$$  /$$ /$$$$$$$   /$$$$$$ 
+| $$$$$$$//$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$|____  $$| $$_  $$_  $$| $$_  $$_  $$| $$| $$__  $$ /$$__  $$
+| $$____/| $$  \__/| $$  \ $$| $$  \ $$| $$  \__/ /$$$$$$$| $$ \ $$ \ $$| $$ \ $$ \ $$| $$| $$  \ $$| $$  \ $$
+| $$     | $$      | $$  | $$| $$  | $$| $$      /$$__  $$| $$ | $$ | $$| $$ | $$ | $$| $$| $$  | $$| $$  | $$
+| $$     | $$      |  $$$$$$/|  $$$$$$$| $$     |  $$$$$$$| $$ | $$ | $$| $$ | $$ | $$| $$| $$  | $$|  $$$$$$$
+|__/     |__/       \______/  \____  $$|__/      \_______/|__/ |__/ |__/|__/ |__/ |__/|__/|__/  |__/ \____  $$
+                              /$$  \ $$                                                              /$$  \ $$
+                             |  $$$$$$/                                                             |  $$$$$$/
+                              \______/                                                               \______/                                                                                                    							
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================
+
+
+---------------------------------------------------------------
+01_NP - Parallel
+
+Application - програма
+
+Presentation - Https/шифрування
+
+Session -  пошук IP
+
+Transport - визначає через який протокл передається данні TCP/UDP
+
+ протоколи для передачі пакетів
+
+TCP - перевіряє доставку
+UDP - не перевіряє доставку пакета
+
+
+
+UdpClient client = new UdpClient();	-- протокол для передачі пакету по мережі
+
+	message = Console.ReadLine()!;
+		byte[] data = Encoding.Unicode.GetBytes(message);
+
+
+				розмір байтів  куди передати
+client.Send(data, data.Length, ipPoint);	-- відправляє пакет
+
+ 
+ static string address = "127.0.0.1"; // адрес сервера	--локальна адреса будь-якого додатку
+   static int port = 8080;      // порт сервера 1000....60 000
+
+
+port - вказівка який додаток має відкрити повідомлення
+
+ IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+   IPEndPoint remoteIpPoint = new IPEndPoint(IPAddress.Any, 0);	-- щоб сервер знав за ким слідкувати
+		
+  client:
+ class Program
+    {
+// адрес и порт сервера, к которому будем подключаться
+
+        static string address = "127.0.0.1"
+        static int port = 8080;            
+        static void Main(string[] args){
+		
+            try{
+                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+                IPEndPoint remoteIpPoint = new IPEndPoint(IPAddress.Any, 0);
+
+                UdpClient client = new UdpClient();
+                string message = "";
+                while (message != "end")
+                {
+
+                    Console.Write("Enter a message: ");
+                    message = Console.ReadLine()!;
+                    byte[] data = Encoding.Unicode.GetBytes(message);	//UDP відправляє тільки у байтах тому конвертуємо
+                  
+
+
+                    client.Send(data, data.Length, ipPoint);
+						//при використанні UDP протоколу, Connect() лише встановлює дані для відправки
+
+								//запам'ятовує хто відповів
+                    data = client.Receive(ref remoteIpPoint);
+                    string response = Encoding.Unicode.GetString(data);
+
+                    Console.WriteLine("server response: " + response + " remote : " + remoteIpPoint);
+                }
+                client.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+  server:
+ class Program
+    {
+        static string address = "127.0.0.1"; // поточний адрес
+        static int port = 8080;              // порт для приема входящих запросов
+
+        static void Main(string[] args)
+        {
+           
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(address), port);
+            IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+            UdpClient listener = new UdpClient(ipPoint);
+            try
+            {
+             Console.WriteLine("Server started! Waiting for connection...");
+                while (true)
+                {
+										//запам'ятовує хто відправив
+                    byte[] data = listener.Receive(ref remoteEndPoint);	--прослуховє на msg
+                    string msg = Encoding.Unicode.GetString(data);
+					
+                    Console.WriteLine($"{DateTime.Now.ToShortTimeString()}: {msg} from {remoteEndPoint}");
+
+						// отправляем ответ
+                    string message = "Message was send!";
+                    data = Encoding.Unicode.GetBytes(message);
+
+                    listener.Send(data, data.Length, remoteEndPoint);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            listener.Close();
+        }
+    }
+	
+---------------------------------------------------------------
+02_NP - Sockets. TCP & UDP
+
+Socket - основний клас який лежить у UDP TCP
+
+using System.Net.Sockets; - треба для  UdpClient client;
+
+IPEndPoint serverEndPoint; - змінна для того щоб доступитися до сервера і робити йому відправку інформації
+
+
+для
+client.SendAsync(data, data.Length, serverEndPoint);	-	обов'язково треба масив байтів
+
+ byte[] data = Encoding.UTF8.GetBytes(msg);
+
+	//сервер
+ip - поставить таке саме
+port - обов'язково треба вказувати
+
+
+ в момент отримання message при Receive сервер запам'ятовує IP відправника
+
+тому:
+	IPEndPoint clientEndPoint = null;	- стор змінну яка потім буде мінятись
+	byte[] data = udpClient.Receive(ref clientEndPoint);	- запише хто написав у clientEndPoint
+
+
+Щоб при відправці msg у 1 клієнта був той самий порт переносимо створення udpClient і IPEndPoint в конструктор:
+
+	 serverEndPoint = new IPEndPoint(IPAddress.Parse(address),port);
+     client = new UdpClient();
+
+
+повідомлення яке буде відправляись на сервер від клієнта при join: string msg = "$<join>";
+
+
+  private async Task Listen()
+        {
+            while (true)
+            {
+
+                var res = await client.ReceiveAsync();
+                string message = Encoding.UTF8.GetString(res.Buffer);	//res.Buffer достає message з Task
+                messages.Add(new MessageInfo(message, DateTime.Now));
+              
+            }
+        }
+
+
+---------------------------------------------------------------
+03_NP - TCP Protocol
+
+create app.xaml
+
+<appSettings>
+	<add key="Server Address" value="127.0.0.1"/>
+	<add key="ServerPort" value="4040"/>
+</appSettings>
+
+ InitializeComponent();
+string address ConfigurationManager. AppSettings["ServerAddress"]!;
+int port = int.Parse( ConfigurationManager. AppSettings["ServerPort"]!);
+serverEndPoint = new IPEndPoint (IPAddress. Parse(address), port);
+client = new TcpClient();
+
+TCP - підключились відпавили відключились (1 на 1)
+
+Flush() - виштовхе з буфера
+
+
+---------------------------------------------------------------
+04_NP - SMTP Protocol
+
+
+ TCP												UDP
+ Безпечний											Небезпечний
+ 
+ Орієнтований на з’єднання							Без з’єднання
+ 
+ Повільний											Швидкий
+ 
+ Гарантована передача								Без гарантії
+ 
+ Використовується у 								Використовується у застосунках
+ критичних застосунках	 							реального часу
+				
+ Механізм упорядкування пакетів						Немає механізму упорядкування
+ Керування потоком									Немає керування потоком
+ 
+ Розширена перевірка помилок						Базова перевірка помилок (контрольна сума)
+ 
+ Заголовок 20 байтів								Заголовок 8 байтів
+ 
+ Механізм підтвердження								Без підтвердження
+ Триетапне рукостискання (Three-Way Handshake)		Без рукостискання
+ DNS, HTTPS, FTP, SMTP тощо							DNS, DHCP, TFTP, SNMP тощо
+
+
+using System.Net;
+using System.Net.Mail;
+
+SMTP - для передачі пошти щоб прочитати треба IMAP
+
+message.IsBodyHtml = true; - 
+
+
+
+
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================								
+ /$$$$$$$$                                                     
+|__  $$__/                                                     
+   | $$  /$$$$$$   /$$$$$$  /$$$$$$/$$$$                       
+   | $$ /$$__  $$ |____  $$| $$_  $$_  $$                      
+   | $$| $$$$$$$$  /$$$$$$$| $$ \ $$ \ $$                      
+   | $$| $$_____/ /$$__  $$| $$ | $$ | $$                      
+   | $$|  $$$$$$$|  $$$$$$$| $$ | $$ | $$                      
+   |__/ \_______/ \_______/|__/ |__/ |__/                      
+                                                               
+                                                               
+                                                               
+ /$$$$$$$                                               /$$    
+| $$__  $$                                             | $$    
+| $$  \ $$ /$$$$$$   /$$$$$$  /$$  /$$$$$$   /$$$$$$$ /$$$$$$  
+| $$$$$$$//$$__  $$ /$$__  $$|__/ /$$__  $$ /$$_____/|_  $$_/  
+| $$____/| $$  \__/| $$  \ $$ /$$| $$$$$$$$| $$        | $$    
+| $$     | $$      | $$  | $$| $$| $$_____/| $$        | $$ /$$
+| $$     | $$      |  $$$$$$/| $$|  $$$$$$$|  $$$$$$$  |  $$$$/
+|__/     |__/       \______/ | $$ \_______/ \_______/   \___/  
+                        /$$  | $$                              
+                       |  $$$$$$/                              
+                        \______/                                                                                            \______/                                                                                                    							
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================
+
+
+---------------------------------------------------------------
+01_NP - Parallel
+
+
+Product backlog - розташ фічі по пріоритету
+
+
+Scrum - методологія на сонові agile яка передбачає розропки проекту спринти і артефакти
+артефакти - product backlog - вимоги замовника 
+			sprint backlog - пункти які прописали прогграмісти  ( список на 1 спринт )
+
+
+
+gitflow - стуктура гілок
+
+git fetch - покаже які файли змінились але не змінює їх (як changes)
+
+
+estimating task - визначення важкості 
+
+вагінація - перехід по сторінкам
+
+
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================								
+    /$$$$$                                                  
+   |__  $$                                                  
+      | $$  /$$$$$$  /$$    /$$ /$$$$$$                     
+      | $$ |____  $$|  $$  /$$/|____  $$                    
+ /$$  | $$  /$$$$$$$ \  $$/$$/  /$$$$$$$                    
+| $$  | $$ /$$__  $$  \  $$$/  /$$__  $$                    
+|  $$$$$$/|  $$$$$$$   \  $/  |  $$$$$$$                    
+ \______/  \_______/    \_/    \_______/                    
+                                                            
+                                                            
+                                                            
+  /$$$$$$                      /$$             /$$          
+ /$$__  $$                    |__/            | $$          
+| $$  \__/  /$$$$$$$  /$$$$$$  /$$  /$$$$$$  /$$$$$$        
+|  $$$$$$  /$$_____/ /$$__  $$| $$ /$$__  $$|_  $$_/        
+ \____  $$| $$      | $$  \__/| $$| $$  \ $$  | $$          
+ /$$  \ $$| $$      | $$      | $$| $$  | $$  | $$ /$$      
+|  $$$$$$/|  $$$$$$$| $$      | $$| $$$$$$$/  |  $$$$/      
+ \______/  \_______/|__/      |__/| $$____/    \___/        
+                                  | $$                      
+                                  | $$                      
+                                  |__/                                                                                                                 \______/                                                                                                    							
+=====================================================								
+=====================================================								
+=====================================================								
+=====================================================
+
+
+---------------------------------------------------------------
+01_IntroToJS
+
+	h1{CONTENT}	+ TAB	
+
+	p>lorem50 	+ TAB
+
+
+		+справа/-ліво 	-верх/+низ 	blur	color
+box-shadow: 5px 		10px 		10px 	black
+
+
+text-transform: uppercase;	-	всі букви caps
+
+							назва файлу стилізації
+<link rel="stylesheet" href="style.css">	- підключає стилізацію
+
+	link:css
+
+
+JS - запускає тільки у браузері
+
+
+	браузер знає: JS HTML CSS
+
+
+ код пишеться у HTML у <script>:
+
+		<script>
+            alert("Hello from JS")	- як MessageBox.Show("d")
+       </script>
+
+	console.log("Hello from JS")  -	 виведе текст у Console на F12
+
+
+<script src="./base.js"></script>	-	Підключаємо JS файл
+
+
+	-JS ДИНАМІЧНО ТИПІЗОВАНИЙ-
+	
+	можна змінити знач будь-якої змінної у будь-який момент
+	Не треба вказувати тип данних
+
+
+let - створ змінну
+
+let number = 10.33;  - автоматично створ типу(number) number
+
+
+всі числа -- тип данних number
+
+
+
+console.log(typeof(number)); - виведе тип данних змінної
+console.log(`${number}`) - для інтерполяції
+
+
+alt + shift + down arrow 	=	Cntrl + D
+
+
+	js - немає char -- це string
+
+
+
+undefined - змінної не існує
+null - пустий об'єкт
+
+let empty			--	value: undefined; type: undefined
+let nullObj = null	--	value: null; type: object
+
+
+
+let array = [1,2,3]	 -	тип данних object
+
+	масиви, класи, словники -- object
+
+
+
+let array = [1,2,3, true, false, "red", "green", [10,11,12]];
+			
+		//сам II масив	//другий елемент у масиві
+console.log(array[7][1])						-- виведе 11
+
+
+
+
+
+	--змінній можна присвоїти функцію--
+
+let summa = function(a,b){console.log(${a} + $(b) = $(a+b)')}	-- тип данних function
+
+
+console.log(summa)	-- виведе не саму функцію а [ function(a,b){console.log(${a} + $(b) = $(a+b)')} ]
+
+summa(a,b)	-- виведе a + b = c
+
+
+
+let array = [1,2,3, true, false, "red", "green", [10,11,12], summa];
+			
+		//виведе результат функціїї -- тобто 5+5=10	
+ console.log(array[8](5,5))
+
+
+
+
+		--цикли--
+
+
+const array = [1,5,2,5,40] -- створ незмінний масив
+
+
+	for		-	get all ements by index
+		
+		for (let i = 0; i < array.length; i++){
+			console.log(`[${i}] - ${array[i]}`);
+		}
+		
+	
+	
+	forof	-	те саме що й foreach (get all elements)
+	
+		for (const number of numbers){
+			console.log(number);
+		}
+	
+	
+	
+	forin	-	foreach(get all indexes)
+	
+		for (const key in numbers){
+			console.log(key);
+		}
+	
+	
+ можна додавати елемнт через індекс
+
+numbers[8] = 888	- останній індекс
+numbers[9] = 1550	- саме додало да масиву зробило+1
+numbers[19] = 1550	-  зробило комірки до 19 індексу і заповнило нові undefined
+
+
+console.log("Some Message)
+console.warn("Some warning"); -  виводяь у коснолі warning
+console.error("Some error");  - error
+
+
+
+		--conditions--
+
+	if    - такий самий як у C#
+
+	switch - такий самий як у C#
+
+
+let message = (3 > 2) ? "bigger":"less";
+console.log(message)
+
+
+
+		--function--
+
+
+ створити функцію:
+
+	function divide(a,b){
+		if(b==0){
+			console.log("Cant divide by 0");
+			return;
+		}
+		return a/b
+	}
+
+
+prompt("Enter your msg: ") -- input()
+
+let a = +prompt("Enter your number: ") -- ковенртить у int
+
+
+
+=========HOT KEYS============
+
+🎯 1. Мультивибір
+
+	✔ Alt + ↑ / ↓
+	
+	Змістити курсор та код
+	
+	✔ Alt + Shift + ↑ / ↓
+	
+	Дублювання рядка
+	
+	✔ Ctrl + Alt + ↑ / ↓
+	
+	Додати новий курсор у наступному рядку
+	(дуже схоже на VS)
+	
+	✔ Ctrl + D
+	
+	Виділити наступний такий самий фрагмент
+	→ кожне натискання додає нове виділення
+	(аналог → "Select Next Occurrence")
+
+🎯 2. Форматування (як у VS)
+
+	✔ Shift + Alt + F
+	
+	Форматувати документ
+	(VS: Ctrl + K, Ctrl + D)
+	
+	✔ Ctrl + K, Ctrl + F
+	
+	Форматувати виділену частину
+	(повністю як у Visual Studio)
+
+	✔ Ctrl + Shift + L
+	
+	Виділити всі входження (аналог Ctrl + Shift + L у VS Code)
+
+=========HOT KEYS============
+
+
+
+---------------------------------------------------------------
+02_Arrays
+
+
+			Data Types
+
+ Primitive Data Type		Non-Primitive Data Type
+
+number,string,undefined,	Object,Array,Function
+null(посилання на пустий 
+	об'єкт), boolean
+
+
+
+у Python і JS масив мітсить посилання на об'єкти
+
+	new - heap
+
+var arr = new Array(7,8,485,68)
+var arr = [7,8,485,68]
+
+
+arr.forEach((elem, index) => //інстукрція
+{									
+	console.log(`Element [${index}] ${elem}`)
+})
+
+
+console.log("Original arr: ",array) -- виодить всі елем у 1 рядок
+
+
+	arr.push(88)	-- додає елем в кінець
+	
+	arr.pop()		-- delete from end
+	
+	arr.shift() 	-- delet first elem
+	
+	arr.unshift(55) -- add 55 to start
+	
+	arr.IndexOf(55)	-- поверне індекс першого входження 55
+							Якщо не знайде поверне -1
+							
+	arr.lastIndexOf(55)	-- поверне індекс з кінця(зправа на ліво)
+								першого входження 55					
+							
+							
+delegate - адреса методу який має запуститись
+
+predicate - поверне true/false
+
+
+//------ return first found element by conditions
+console.log("Found: ", arr.find((el)=> el > 0));							
+							
+		
+arr.sort()	-- сортує як str (1 потім 2 буква)
+
+
+arr.sort((a,b) => a-b)	- sort descending
+
+
+arr.splice(2,5)	-- видаляє з 2 по 5 індекси
+
+---- delete from start index some amount elements
+	and insert new elements in their place
+	
+	array.splice(2,5,15,15,15,15,15,15)
+
+var copy = array.slice(2,array.length-1);	-- отримує копію масиву 
+									з позицій (з 2 по array.length-1)
+
+
+
+array = [4,6,7,8,1,-4,0,99];
+
+const filtered = array.filter((el) => el%2 == 0); --виводить парні елем
+
+
+	--strig--
+
+let str = "Help"
+
+str[3] - поерне 'p' -  бо під 3 індексом
+str.CharAt(3) - поерне 'p' -  бо під 3 індексом
+
+str.startsWith("?")	- поверне true/false
+str.endsWith("?")		- поверне true/false
+
+
+str.IndexOf("p")		-	шукає перше входження з ліва на право
+str.lastIndexOf("p")	-	шукає перше входження з права на ліво
+
+str.includes("p")	-	поверне true/false
+
+
+str.replace(" ", "-")	 - замінить перший пробіл на '-'
+
+str.repeat(3)	-	дублює себе 3 рази
+
+
+str.splice(3,8); - виріже з 3 по 8 індекс
+
+str.toUpperCase()	- повертають копыю
+str.toLowerCase()
+
+
+	let words = str.split(" ") - ділить string по пробілам
+
+
+
+trim - видаляє пробіли	
+							
+							
+var - дозволяє створювати об'єкти з однаковою назвою
+	можна використати змінну перед тим як вона створена
+	
+let	-	ні перевіряє і забороняє створ змінні з однаковою назвою
+	і використ змінну до її створення
+							
+							
+							
+							
