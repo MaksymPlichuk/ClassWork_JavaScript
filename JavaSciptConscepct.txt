@@ -2509,6 +2509,7 @@ str.repeat(3)	-	дублює себе 3 рази
 
 
 str.splice(3,8); - виріже з 3 по 8 індекс
+str.slice(3,8); - зробить підмасив з 3 по 8 індекс
 
 str.toUpperCase()	- повертають копыю
 str.toLowerCase()
@@ -2527,6 +2528,122 @@ var - дозволяє створювати об'єкти з однаковою 
 let	-	ні перевіряє і забороняє створ змінні з однаковою назвою
 	і використ змінну до її створення
 							
-							
-							
+---------------------------------------------------------------
+03_Objects
+
+
+callBackFunction	--	функція може повертати або не повертати
+					має безліч аргументіів і всередені виконує алгоритму
+
+predicate	--	приймає елемнт і повертає bool
+
+
+
+Object - складний тип данних який використовується для великих данних							
+			містить різний тип данних
+			
+var obj = new Object()	- створ об'єкт
+
+var obj = {}	-- словник			
+
+obj.name = "Name"	- створ властивість name
+obj.age = 56	-	створ властивість age
+obj.adress = "Soborna"	--	створ властивість adress
+
+	якщо такої власт немає то вона презапишеться
+	
+delete obj.adress	-	видалить property adress	
+
+
+	//ключ - значення 
+	
+	let product = { 
+		name :	"Samsung",
+		aplications : ["play market", "SAFARI"]
+		owner:{				-- ще один словник у об'єкті
+			name : "Vsads"
+			surname: "dssd"
+		}
+	}
+
+	-або-
+	
+let product = {};
+	
+product["name"] = "Ball";
+product["size"] = 30;
+
+product["size"] = 50;	//overwrite
+
+console.log("Type: " + product['type']);
+
+
+	ДВІ різні властивості
+	
+student['Average Mark'] = 7.8; 	// allows white-space characters
+student.averageMark = 8.8;
+
+console.log("Average Mark: " + student['Average Mark']);
+console.log("averageMark: " + student.averageMark);
+
+
+
+
+	//вивід данних по ключу
+for (var property_key in student) {
+    console.log(property_key + " - " + student[property_key]);
+}
+
+
+	var car = {
+    mark: "Nissan",
+    model: "Note",
+    year: 2000,
+    color: "Grey",
+		owner:
+		{
+			name: "Vitia",
+			surname: "Oliunuk"
+		}
+	}
+	
+	for (var property_key in car) {
+	
+		if (property_key == "owner") {		//вівід owner
+			for (var key in car[property_key]) {
+				console.log(key + " - " + car[property_key][key]);
+			} 
+		}
+		else
+		{
+			console.log(property_key + " - " + car[property_key]);
+	
+		}
+	}
+
+
+
+
+const player = {
+	login: "super_user123",
+	password: "Qwerty",
+	email: "bablafra@gmail.com",
+	score: 0,
+	
+//функція в об'єкті	
+
+	print : function(){		//обов'язково this щоб виводило проперті з класу
+         console.log(`User: ${this.login} with score: ${this.score}`);
+    },
+    increaseScore(value)
+    {
+        if(value > 0)     
+            this.score +=value;
+        else
+            console.error("Error value");
+    }
+}
+
+player.print();		-- викликати функцію					
+player.increaseScore(5);							
 							
