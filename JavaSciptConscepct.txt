@@ -2647,3 +2647,105 @@ const player = {
 player.print();		-- викликати функцію					
 player.increaseScore(5);							
 							
+							
+---------------------------------------------------------------
+04_IntroToOOP
+
+
+class Car{
+	model;
+	year;
+	color;
+	
+	print()	{
+		console.log(this.model)
+	}
+	
+	constructor(model,year,color){
+		this.model = model
+	}
+	
+}
+
+const myCar = new Car();
+
+myCar.model = "NISSAN";		--	ініціалізація без конструктора
+myCar.print();						
+							
+							
+			==АБО==				
+class Car{
+	//model;
+	//year;
+	//color;	-- можна не створ змінні,
+				вони створяться у конструкторі
+	
+	
+	constructor(model,year,color){
+		this.model = model
+	}
+	
+	set Speed(value)	-- setter
+	{
+		if(value>=0)
+			this.speed = value;
+		else
+			this.speed = 0;
+	}		
+	get Mils(){		-- getter
+		return 
+	
+	}
+	
+}
+
+різниця між змінними і проперті	--	у перевірці данних
+
+
+		Extends == Inheritance
+
+
+class PoliceCar extends Car{
+
+	constructor(model,year,color,volume){
+			super(model,year,color)	--	наслідує батьквський конструктор
+			this.volume = volume;
+		}
+	print(){
+		super.print();	--	наслідує батьківський
+		console.log(thsi.volume)
+	}
+
+}
+
+
+---------------------------------------------------------------
+05_DOM
+
+Bootstrap	-	заміняє класичний HTML
+
+	--бутстрап--
+https://getbootstrap.com/docs/5.1/getting-started/introduction/
+
+	--теми/бібліотеки для бутсрапа--
+https://bootswatch.com/		
+
+
+bootstrap.minCss - вся стилізація в 1 рядку
+bootstrap.css - вся стилізація у класах
+
+
+div.container	+ tab	//додавє клас container
+
+для адаптивності додаємо елементи у клас container
+
+https://getbootstrap.com/docs/5.1/layout/utilities/#margin-and-padding
+
+
+	--нащви класів для елементів з бутстрапа--
+https://getbootstrap.com/docs/5.1/utilities/spacing/#margin-and-padding
+
+
+col-8 : сума має не перевищувати 12
+
+
