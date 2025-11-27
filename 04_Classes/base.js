@@ -1,15 +1,3 @@
-// Завдання 1
-
-// Створіть об’єкт, що описує автомобіль (виробник, модель, рік
-// випуску, середня швидкість), і наступні функції для роботи з цим
-// об’єктом.
-
-// 1. Функція для виведення інформації про автомобіль на
-// екран.
-// 2. Функція для підрахунку необхідного часу для подолання
-// переданої відстані із середньою швидкістю. Враховуйте,
-// що через кожні 4 години дороги, водієві необхідно робити
-// перерву на 1 годину.
 
 console.log("Task 1")
 
@@ -44,19 +32,82 @@ mySummerCar.distanceCalc(1500);
 
 console.log("Task 2")
 
-// Завдання 3
-// Створіть об’єкт, що описує час (години, хвилини, секунди), і
-// наступні функції для роботи з цим об’єктом.
 
-// 1. Функція виведення часу на екран.
-// 2. Функція зміни часу на передану кількість секунд.
-// 3. Функція зміни часу на передану кількість хвилин.
-// 4. Функція зміни часу на передану кількість годин.
+function gcd(a, b) {    //НСД
+    return b == 0 ? a : gcd(b, a % b);
+};
+function lcm(a, b) {    //НСК
+    return Math.abs(a * b) / gcd(a, b);
+};
 
-// Враховуйте те, що в останніх 3 функціях при зміні однієї частини часу, може змінитися й інша. Наприклад: якщо до часу
+class Fraction {
+    constructor(chiselnik, znamennik) {
+        this.numerator = chiselnik;
+        this.denominator = znamennik;
+    };
 
-// «20:30:45» додати 30 секунд, то має вийти «20:31:15», а не «20:30:75»
 
+
+    addFractions(chiselnik, znamennik) {
+        if (this.denominator == znamennik) {
+            let newNumer = this.numerator + chiselnik;
+            console.log(`${this.numerator}/${this.denominator} + ${chiselnik}/${znamennik} = ${newNumer}/${znamennik}`);
+        }
+        else {
+            let newDenomir = lcm(this.denominator, znamennik);
+            let firstNum = (newDenomir / this.denominator) * this.numerator;
+            let secndNum = (newDenomir / znamennik) * chiselnik;
+
+            let newNumer = firstNum + secndNum;
+            console.log(`${this.numerator}/${this.denominator} + ${chiselnik}/${znamennik} = ${newNumer}/${newDenomir}`);
+        }
+    };
+    subtractFractions(chiselnik, znamennik) {
+        if (this.denominator == znamennik) {
+            let newNumer = this.numerator - chiselnik;
+            console.log(`${this.numerator}/${this.denominator} - ${chiselnik}/${znamennik} = ${newNumer}/${znamennik}`);
+        }
+        else {
+            let newDenomir = lcm(this.denominator, znamennik);
+            let firstNum = (newDenomir / this.denominator) * this.numerator;
+            let secndNum = (newDenomir / znamennik) * chiselnik;
+
+            let newNumer = firstNum - secndNum;
+            console.log(`${this.numerator}/${this.denominator} - ${chiselnik}/${znamennik} = ${newNumer}/${newDenomir}`);
+        }
+    };
+
+    multiplyFractions(chiselnik, znamennik) {
+        let newNumer = this.numerator * chiselnik;
+        let newDenomir = this.denominator * znamennik;
+        console.log(`${this.numerator}/${this.denominator} * ${chiselnik}/${znamennik} = ${newNumer}/${newDenomir}`);
+    };
+    divideFractions(chiselnik, znamennik) {
+        let newNumer = this.numerator * znamennik;
+        let newDenomir = this.denominator * chiselnik;
+        console.log(`${this.numerator}/${this.denominator} / ${chiselnik}/${znamennik} = ${newNumer}/${newDenomir}`);
+    };
+    reductionFractions() {
+        let reduct = gcd(this.numerator, this.denominator)
+        this.numerator = this.numerator / reduct;
+        this.denominator = this.denominator / reduct;
+
+        console.log(`${this.numerator}/${this.denominator} reduct by ${reduct} = ${this.numerator}/${this.denominator}`);
+    }
+}
+
+let frac = new Fraction(8, 4)
+frac.addFractions(2, 4)
+frac.addFractions(2, 10)
+frac.subtractFractions(2, 4)
+frac.subtractFractions(2, 10)
+frac.multiplyFractions(2, 10)
+frac.divideFractions(2, 10)
+
+frac.reductionFractions();
+
+
+console.log("Task 3")
 
 class Time {
     hours;
@@ -83,16 +134,43 @@ class Time {
 
     };
     changeTimeBySeconds(givenSeconds) {
-        let totalSeconds = this.hours / 60;
-        /*//5555/3600-h; 5555/60%60 -m; 5555%60 S
-        / m = (5555/60)% * 60
-        = 92
-        / h = 5555/3600 = 1
-        //5 = 5555%60*/
-    
-    }
+        let totalSeconds = this.hours * 3600 + this.minutes * 60 + this.seconds;
+        let finalTime = totalSeconds + givenSeconds;
+
+        this.hours = Math.floor(finalTime / 3600);
+        this.minutes = Math.floor(finalTime / 60 % 60);
+        this.seconds = Math.floor(finalTime % 60);
+
+        console.log(`totalSeconds: ${finalTime}`)
+    };
+    changeTimeByMinutes(givenMinutes) {
+        let totalMinutes = this.hours * 60 + this.minutes + this.seconds / 60;
+        let finalTime = totalMinutes + givenMinutes;
+
+        this.hours = Math.floor(finalTime / 60);
+        this.minutes = Math.floor(finalTime % 60);
+        this.seconds = Math.floor(finalTime % 1 * 60);
+
+        console.log(`totalMinutes: ${finalTime}`)
+    };
+    changeTimeByHours(givenHours) {
+        let totalHours = this.hours + this.minutes / 60 + this.seconds / 3600;
+        let finalTime = totalHours + givenHours;
+
+        this.hours = Math.floor(finalTime % 24);
+        this.minutes = Math.floor(finalTime % 1 * 60);
+        this.seconds = Math.floor((finalTime % 1 * 60) % 1 * 60);
+
+        console.log(`totalHours: ${finalTime}`)
+    };
 
 }
 
-
-
+let time = new Time(1, 20, 30);
+time.showTime();
+time.changeTimeBySeconds(60);
+time.showTime();
+time.changeTimeByMinutes(68);
+time.showTime();
+time.changeTimeByHours(68);
+time.showTime();

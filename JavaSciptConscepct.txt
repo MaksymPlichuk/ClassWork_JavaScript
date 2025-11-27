@@ -2693,7 +2693,7 @@ class Car{
 			this.speed = 0;
 	}		
 	get Mils(){		-- getter
-		return 
+		return this.speed *0.621;
 	
 	}
 	
@@ -2722,30 +2722,101 @@ class PoliceCar extends Car{
 ---------------------------------------------------------------
 05_DOM
 
+DOM — Document Object Model	--	модель представлення HTML-документа у вигляді дерева об’єктів.
+
+	Модель представлення HTML у вигляді дерева об'єктів.
+	JS може:
+	
+	змінювати текст, стилі, атрибути
+	
+	створювати/видаляти елементи
+	
+	реагувати на події (click, input…)
+
+
+
+
+
 Bootstrap	-	заміняє класичний HTML
 
-	--бутстрап--
+	Bootstrap — це CSS/JS фреймворк для швидкої верстки сайтів.
+Головна мета — швидко створювати адаптивні, акуратні інтерфейси без написання CSS вручну.
+
+Bootstrap дає:
+
+	готову адаптивну сітку (grid)	
+	кнопки, картки, модальні вікна, меню	
+	відступи, кольори, flex-класи, дисплеї	
+	JavaScript компоненти (dropdown, modal…)
+	
+	Важливо: Bootstrap не заміняє HTML, він працює на HTML, додаючи стилі через класи.
+
+
 https://getbootstrap.com/docs/5.1/getting-started/introduction/
 
-	--теми/бібліотеки для бутсрапа--
+			підключення
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>DOM</title>
+		<link rel="stylesheet" href="./CSS/bootstrap.css">  
+	</head>		
+
+
+bootstrap.min.css — мініфікований, 1 рядок (легше, швидше грузиться)
+bootstrap.css — повний формат з коментарями вся стилізація у класах (зручний для читання)
+
+
+
+Bootswatch — це набір безкоштовних тем для Bootstrap.
+
+Тобто:
+
+	той самий Bootstrap → але з іншим оформленням	
+	не треба переписувати класи, міняється лише CSS
+
 https://bootswatch.com/		
 
-
-bootstrap.minCss - вся стилізація в 1 рядку
-bootstrap.css - вся стилізація у класах
-
-
-div.container	+ tab	//додавє клас container
-
-для адаптивності додаємо елементи у клас container
-
-https://getbootstrap.com/docs/5.1/layout/utilities/#margin-and-padding
+✔️ міняє стиль сайту
+✔️ не змінюючи класи
+✔️ просто підміняється CSS
 
 
-	--нащви класів для елементів з бутстрапа--
+
+
+div.container + tab	//додавє клас container | <div class="container">
+
+	для адаптивності додаємо елементи у клас container
+
+
+<div class="container">
+	...
+</div>
+container — центрує сайт і задає максимальну ширину + адаптивність.
+
+
+	--гріди--
+https://getbootstrap.com/docs/5.1/layout/grid/
+
+
+
+div class = "col-8"  - займе 8 з 12 в ширину
+
+
+	--Відступи, розміри, утиліти (Utilities)--
+
+Документація:
 https://getbootstrap.com/docs/5.1/utilities/spacing/#margin-and-padding
 
+Приклади:
 
-col-8 : сума має не перевищувати 12
+m-3 → margin
+p-4 → padding
+mt-5 → margin-top
+px-2 → padding-left + padding-right
 
+d-flex → flex-контейнер
 
+text-center → центрує текст
+
+bg-dark text-white → фон + колір тексту
