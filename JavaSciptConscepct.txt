@@ -2820,3 +2820,90 @@ d-flex → flex-контейнер
 text-center → центрує текст
 
 bg-dark text-white → фон + колір тексту
+
+
+---------------------------------------------------------------
+05_DOM Part 2
+
+th 	-- шапка рядка
+td 	-- контент у рядка
+
+
+<tbody>
+	<tr class="table-info">
+		<th scope="row">Info</th>
+			<td>Column content</td>
+			<td>Column content</td>
+			<td>Column content</td>
+	</tr>
+</tbody>
+
+
+DOM  (Document Object Model) - зв'язок HTML з JS
+
+
+	[DOCUMENT]  - Root Node
+	|
+	v
+	[HTML] - Element Node
+	|
+	+-----------------------------+
+	|                             |
+	v                             v
+	[HEAD]                        [BODY]     - Element Nodes
+	|                             |
+	|                             +---------------------------+
+	v                             |                           |
+	[TITLE]                       [H1]                       [SCRIPT]
+	|                             |                           |
+	v                             v                           v
+	"My Title"                 "My Header"                 "alert();" 
+	(Text Node)                (Text Node)                 (Text Node)
+
+
+
+document	--	DOM дерево, зв'язує JS і HTML
+
+document.getElementById()	--	найкращий бо id не повторюються
+
+tbody	-	тег у якому буде мінятись контент
+
+	<tbody id='table-body'>
+		<tr ........>
+	</tbody>
+
+const tableBody = document.getElementById(table-body);
+
+
+						внутрішній HTML 
+tableBody.innerHTML +=
+		<tr class="table-info">
+			<th scope="row">1</td>
+			<td>IPhone</td>
+			<td>Some information</td>
+			<td>467</td>
+		</tr>';		--	до таблиці додається контент
+
+
+
+<button ... onclick()		--	обробник при натисненні
+	.... id = "add-btn"  >Success</button>
+
+
+const createBtn = document.getElementById('add-btn');
+
+щоб взяти елемент з HTML у JS треба дати елементу id
+
+
+			делегат
+createBtn.onclick = () =>{
+	console.log(....)
+}
+
+	<button	type="submit"	-- робить відправку на сервер 
+
+
+
+
+
+
