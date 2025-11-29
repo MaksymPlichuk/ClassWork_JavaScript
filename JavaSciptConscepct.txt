@@ -2903,6 +2903,30 @@ createBtn.onclick = () =>{
 	<button	type="submit"	-- робить відправку на сервер 
 
 
+---------------------------------------------------------------
+06_Fetch
+
+
+API	- ссилки на яких зберегіається тестова інформація
+
+fetch	-	робить запит на сервер по url чекає відповідь і ловить цю відповідь	
+
+const gitHubUsers = "https://api.github.com/users";
+	fetch(gitHubUsers)	--	повертає тип данних Promise
+
+Promise	- мітсить Response | робиться Task
+
+	асинхронний метод тому пишемо await	але ротрібен async				
+
+async function showGitHubUsers()
+	{
+		const response = await fetch(gitHubUsers);
+		
+		let json = await response.json(); -- розконвертує інфу що прийде
+		
+		console.log(json);	
+	}
+
 
 
 
