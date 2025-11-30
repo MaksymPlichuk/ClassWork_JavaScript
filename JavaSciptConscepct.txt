@@ -2907,8 +2907,13 @@ createBtn.onclick = () =>{
 06_Fetch
 
 
+запит google.com -> відправ на сервер -> формується пакет -> розпаковується пакет (пишеться HTML, JS)
+
+
 API	- ссилки на яких зберегіається тестова інформація
 
+
+	асинхронність
 fetch	-	робить запит на сервер по url чекає відповідь і ловить цю відповідь	
 
 const gitHubUsers = "https://api.github.com/users";
@@ -2917,6 +2922,7 @@ const gitHubUsers = "https://api.github.com/users";
 Promise	- мітсить Response | робиться Task
 
 	асинхронний метод тому пишемо await	але ротрібен async				
+
 
 async function showGitHubUsers()
 	{
@@ -2929,5 +2935,16 @@ async function showGitHubUsers()
 
 
 
+async function showGitHubUserAvatar(login) {
+    const response = await fetch(gitHubUsers + '/' + login);	-- отримує Promise
+    const result = await response.json();	-- розконвертовує цей Promise на json
+
+				//тег img з id=`avatar-img`
+    const avatarImg = document.getElementById('avatar-img');	
+	
+							//властивість об'єкта
+    avatarImg.src = result.avatar_url;
+
+}
 
 
