@@ -2948,3 +2948,91 @@ async function showGitHubUserAvatar(login) {
 }
 
 
+---------------------------------------------------------------
+07_Fetch	Part 2
+
+script	--	завжди підключ знизу 
+
+HTTPS S - secure данні шифруються
+
+
+UDP/TCP	--	real time connection
+
+
+HTTP --	 протокол передачі HTML
+
+React	-	працє тільки на запитах
+
+
+class = 'text-center mt-5'	-- центрує елемнт з відступом зверху
+
+
+	HTML:
+<div class="text-center mt-5">
+	<button onclick="fetchCat()" 	-- робиться обробник
+		class="btn btn-primary">Фото котика</butto I
+</div>
+
+	JS:
+const fetchCat2 = () => {
+	const url = "https://cataas.com/cat";
+	console.log(url);
+}
+
+JSON	- передача object через текст
+
+
+
+let respone = await fetch(url);
+
+respone.
+		blob	-	файли/картинка/відео
+		json	- json
+		text	-	 для тектса
+
+
+HTTP methods:
+
+	Get		--	отрмати данні
+	Post	-- передати серверу
+	Patch	
+	Trace
+
+
+DOMContentLoaded	--	подія яка спрацює коли HTML повністю загрузиться
+
+	//задає подію
+document.addEventListener("DOMContentLoaded", () => {
+	const image = document.getElementById("image");
+	image.hidden = true;
+});
+
+
+async function fetchCharacters()
+// then catch
+const url = "https://thronesapi.com/api/v2/Characters";
+
+try {
+	const response = await fetch(url);
+	const data = await response.json();
+	console.log(data);
+} catch (error) {
+	console.log(error);
+}
+
+	//менше коду без async
+fetch(url)
+.then(response => response.json())
+.then(data => { console.log(data)})
+.catch(error => console.log(error));
+
+class і object	--	object створена змінна а class ого описує
+
+
+
+
+
+
+
+
+
