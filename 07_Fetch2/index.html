@@ -11,12 +11,42 @@
 </head>
 
 <body>
-    <div class="text-center mt-5">
-        <button onclick="fetchImage()">CLICK</button>
-    </div>
+
     <div class="text-center mt-3">
         <img id="dogPhoto" height="500" src="" alt="dogPhoto">
     </div>
+    <div class="text-center mt-5">
+        <button onclick="fetchImage()">CLICK</button>
+    </div>
+
+    <table class="table" id="breedTable">
+        <thead>
+            <tr>
+                <th scope="col">Breed</th>
+                <th scope="col">Subbreed</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <nav class="navbar bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <div>
+                <a class="navbar-brand" href="#">Tip:</a>
+                <p id="tipBox"></p>
+            </div>
+            <div>
+                <button onclick="getText()">SEND</button>
+                <input id="inputTip" placeholder="Enter Word"></input>
+            </div>
+
+
+
+        </div>
+    </nav>
+
 
     <script src="base.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

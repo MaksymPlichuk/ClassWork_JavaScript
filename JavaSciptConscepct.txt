@@ -2960,9 +2960,17 @@ UDP/TCP	--	real time connection
 
 
 HTTP --	 протокол передачі HTML
-
 React	-	працє тільки на запитах
 
+
+	стилі підключати
+			спочатку bootstrap
+			потім свої
+	
+	script підключати
+			свої
+			потім bootstrap
+	
 
 class = 'text-center mt-5'	-- центрує елемнт з відступом зверху
 
@@ -2985,11 +2993,11 @@ JSON	- передача object через текст
 
 let respone = await fetch(url);
 
-respone.
-		blob	-	файли/картинка/відео
-		json	- json
-		text	-	 для тектса
-
+	respone.
+			blob	-	файли/картинка/відео
+			json	- json
+			text	-	 для тектса
+	
 
 HTTP methods:
 
@@ -3001,38 +3009,47 @@ HTTP methods:
 
 DOMContentLoaded	--	подія яка спрацює коли HTML повністю загрузиться
 
-	//задає подію
-document.addEventListener("DOMContentLoaded", () => {
-	const image = document.getElementById("image");
-	image.hidden = true;
-});
+
+ //задає подію
+	document.addEventListener("DOMContentLoaded", () => {
+		const image = document.getElementById("image");
+		image.hidden = true;
+	});
 
 
-async function fetchCharacters()
-// then catch
+	async function fetchCharacters()
+	
 const url = "https://thronesapi.com/api/v2/Characters";
 
-try {
-	const response = await fetch(url);
-	const data = await response.json();
-	console.log(data);
-} catch (error) {
-	console.log(error);
-}
+	try {
+		const response = await fetch(url);
+		const data = await response.json();
+		console.log(data);
+	} 
+	catch (error) {
+		console.log(error);
+	}
 
-	//менше коду без async
+			//менше коду без async
+					мінуси data доступна лише в then
+			
 fetch(url)
-.then(response => response.json())
-.then(data => { console.log(data)})
-.catch(error => console.log(error));
-
+	.then(response => response.json())		-- розпаковує fetch
+	.then(data => { console.log(data)})		-- розпаковує data з response
+	.catch(error => console.log(error));
+	
+														lambda
+ then - той самий await	результат повернеться у .then(response => {} )
+	
+	
 class і object	--	object створена змінна а class ого описує
 
 
+Object.keys(person)	--	повертаэ масив ключів об'єкту person
 
 
-
-
+---------------------------------------------------------------
+08_
 
 
 
