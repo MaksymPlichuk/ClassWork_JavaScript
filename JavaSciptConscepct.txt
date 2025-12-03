@@ -3049,7 +3049,71 @@ Object.keys(person)	--	повертаэ масив ключів об'єкту pe
 
 
 ---------------------------------------------------------------
-08_
+08_Events
+
+JSON formatter	-	для зручніших JSON
+
+forin	-	для об'єктів
+forof	-	для масивів
+
+	focus	--	виділення елемента табом
+	
+	onmouse enter	--	коли курсор на об'єкті
+	
+	onsumbit	--	при натисненні форми
+	
+	
+	Типи event:
+	
+ HTML event		-- гірше для безпеки
+ 
+ object event	-- можна лише 1 функцію задати
+ 
+ event listener	-- такий саий як 2 але можна додити багато функцій
+
+const btnListener = document.getElementById("btnListener");
+btnListener.addEventListener("click",
+	btnListener.addEventListener("click", () => {});
+
+
+const box event.target;
+box.style.backgroundColor = #444
+
+
+event - створ від HTML-документа
+
+	event.target	-- повертає елемнт | об'єкт html тега
+	
+	function boxClick(event) {
+		console.log(event.target);
+}
+
+
+	function enterBox (event) {	
+		//об'єкт	//стиль прозорість	
+	event.target.style.opacity = 0;
+}
+
+---
+
+	1 == '1'
+==	- перетвор знаення до дого типу і порівнює
+
+	1 === 1
+===	- перевіряє щей тип данних
+
+---
+
+event.code	-- id кнопки / клавіша
+event.key	--  кнопка
+
+
+
+const height = parseInt(circle.style.height.split("px")[0]);	
+			-- вирізаємо px для обрахунків
+
+
+
 
 
 

@@ -1,0 +1,17 @@
+.menuBox{
+    border-color: lightskyblue;
+    background-color: beige;
+
+}
+
+.circle{
+    border-radius: 50%;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    
+}
+.trafficLight{
+    align-content: flex-start;
+}
