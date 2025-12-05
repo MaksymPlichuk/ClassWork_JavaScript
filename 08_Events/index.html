@@ -1,23 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="text-center mt-5">
+    <div class="container">
         <div class="menuBox">
-            <button></button>
-            <button></button>
+            <div>
+
+            </div>
+            <div class="menuButtons">
+                <button onclick="menuShowHTML()">HTML</button>
+                <button onclick="menuShowCSS()">CSS</button>
+                <button onclick="menuShowJS()">JS</button>
+            </div>
+            <div id="menuInfo" class="menuText">
+                <p></p>
+            </div>
+
         </div>
     </div>
 
-    <div>
+    <div class="text-center mt-5" style="background-color: lightcoral;">
+
+        <div id="firstParag">
+            <div class="task2Header">
+                <h2>What is Lorem Ipsum?</h2>
+                <button onclick="delete1p()">[X] delete</button>
+            </div>
+            <div>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <br>
+            </div>
+        </div>
+        <div id="secondParag">
+            <div class="task2Header">
+                <h2>Why do we use it?</h2>
+                <button onclick="delete2p()">[X] delete</button>
+            </div>
+            <div>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                    default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
+                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).</p>
+                <br>
+            </div>
+        </div>
+        <div id="thirdParag">
+            <div class="task2Header">
+                <h2>Where can I get some?</h2>
+                <button onclick="delete3p()">[X] delete</button>
+            </div>
+            <div>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                    alteration in some form, by injected humour, or randomised words which don't look even slightly
+                    believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                    anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet
+                    tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
+                    It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,
+                    to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free
+                    from repetition, injected humour, or non-characteristic words etc.</p>
+                <br>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
         <div class="trafficLight">
             <div id="light1" class="circle"></div>
             <div id="light2" class="circle"></div>
@@ -25,11 +90,43 @@
         </div>
         <button onclick="nextColor()">NEXT</button>
     </div>
-    
+
+    <div id="parag" class="container" style="background-color: lightpink;">
+        <p onclick="paraClick(event)">1. "Clean Code: A Handbook of Agile Software Craftsmanship"
+            Author: Robert C. Martin
+            Date: 2008</p>
+
+        <p onclick="paraClick(event)">2. "The Pragmatic Programmer: Your Journey to Mastery"
+            Authors: Andrew Hunt, David Thomas
+            Date: 1999</p>
+
+        <p onclick="paraClick(event)">3. "You Don't Know JS (Book Series)"
+            Author: Kyle Simpson
+            Date: 2014</p>
+
+        <p onclick="paraClick(event)">4. "Introduction to Algorithms"
+            Authors: Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein
+            Date: 2009 (3rd edition)</p>
+
+        <p onclick="paraClick(event)">5. "JavaScript: The Good Parts"
+            Author: Douglas Crockford
+            Date: 2008</p>
+    </div>
+
+    <div class="text-center mt-5">
+        <p>Random Number</p>
+        <p id="number">0</p>
+        <button onclick="generateNum()">Generate random number</button>
+    </div>
+
+    <div class="pointerBox">
+        
+    </div>
 
     <script src="base.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

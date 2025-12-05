@@ -1,6 +1,11 @@
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .menuBox{
-    border-color: lightskyblue;
     background-color: beige;
+    display: flex;
+    padding: 15px;
+    
 
 }
 
@@ -13,5 +18,35 @@
     
 }
 .trafficLight{
-    align-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menuButtons{
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: lightblue;
+    width: 20%;
+}
+.menuText{
+     display: flex;
+    flex-direction: column;
+    width: 50px;
+    margin-top: 15px;
+    padding: 15px;
+    width: 50%;
+    border: 2px solid lightblue;   
+}
+button{
+    margin: 5px;
+}
+.task2Header{
+    display: flex;
+    align-items:flex-start;
+}
+.pointerBox{
+    position: fixed;
 }

@@ -3056,7 +3056,8 @@ JSON formatter	-	для зручніших JSON
 forin	-	для об'єктів
 forof	-	для масивів
 
-	focus	--	виділення елемента табом
+	onfocus	--	виділення елемента табом
+	onblur	--	цей фокус втрачається
 	
 	onmouse enter	--	коли курсор на об'єкті
 	
@@ -3065,36 +3066,65 @@ forof	-	для масивів
 	
 	Типи event:
 	
- HTML event		-- гірше для безпеки
+ ✅HTML event		-- гірше для безпеки 	|можна скачати HTML і по назві js файлу прочитати весь код, тому всі важливі речі на сервері
  
- object event	-- можна лише 1 функцію задати
- 
- event listener	-- такий саий як 2 але можна додити багато функцій
+ ✅object event	-- можна лише 1 функцію задати
 
-const btnListener = document.getElementById("btnListener");
-btnListener.addEventListener("click",
-	btnListener.addEventListener("click", () => {});
+    const btnObject = document.getElementById("btnObject");
+    btnObject.onclick = btnObjectClick;
+
+ 
+ ✅event listener	-- такий саий як 2 але можна додити багато функцій
+
+	const btnListener = document.getElementById("btnListener");
+										
+									//всі події без on
+		btnListener.addEventListener("click",
+			btnListener.addEventListener("click", () => {});
+
 
 
 const box event.target;
 box.style.backgroundColor = #444
 
 
-event - створ від HTML-документа
+event - створ від HTML-документа, має у ВЛАСТИВОСТЯХ багато інфи
 
-	event.target	-- повертає елемнт | об'єкт html тега
+
+
+	event.target	-- повертає елемнт по якому клыкнули | об'єкт html тега
 	
 	function boxClick(event) {
 		console.log(event.target);
-}
+	}
 
+
+	if (activeBox != null)  -те саме що- if (activeBox)
+
+
+
+<div class="boxContainer">
+            <div onmouseenter="enterBox(event)" onmouseleave="leaveBox(event)" class="boxHover"></div>
+	.....
 
 	function enterBox (event) {	
-		//об'єкт	//стиль прозорість	
-	event.target.style.opacity = 0;
-}
+			//об'єкт	//стиль прозорість	
+		event.target.style.opacity = 0;
+	}
+
+
+
+document.addEventListener("keydown", randomColor);
+
+							//автоматично передаситься
+	function randomColor(event) {        
+		const box = document.getElementById("superBox");
 
 ---
+
+inline-block	--	по ширині inline(content) по висоты block (content)	
+
+
 
 	1 == '1'
 ==	- перетвор знаення до дого типу і порівнює
@@ -3108,12 +3138,15 @@ event.code	-- id кнопки / клавіша
 event.key	--  кнопка
 
 
+const r = Math.floor(Math.random() * 256); // 0 - 255
+
 
 const height = parseInt(circle.style.height.split("px")[0]);	
 			-- вирізаємо px для обрахунків
 
 
-
+---------------------------------------------------------------
+09_
 
 
 
