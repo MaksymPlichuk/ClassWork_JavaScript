@@ -3146,7 +3146,109 @@ const height = parseInt(circle.style.height.split("px")[0]);
 
 
 ---------------------------------------------------------------
-09_
+09_BOM DOM
+
+
+
+Bootstrap IntelliSense	-	bootstrap помічник
+
+	//div у яку будуть записуватись інші елементи
+const container = document.getElementById("container");
+
+function createBoxHandle() {
+
+			//створити div через JS
+	const box = document.createElement("div");
+	box.classList.add('className')		-- додаємо класс div
+	
+		//div записується у container
+	container.appendChild(box);
+}
+
+
+function removeBoxHandle(event){
+	const box = event.target;
+	
+	container.removeChild(box);	--	правильніше за box.remove(), хоча так теж мона
+	
+	container.removeChild	--	видаляє елемент у конкретному контейнері
+		якщо box буде багато то може видалитись box які у інших місцях
+	
+	}
+	
+function createBoxHandle() {
+	const box = document.createElement("div");
+	box.classList.add("box");
+	box.style.backgroundColor = randomRgb();
+	box.addEventListener("click", removeBoxHandle)
+	container.appendChild(box);
+
+}
+
+function mouse EnterHandler(event) {
+const box = event.target;
+	box.innerText = "X";
+
+}
+	
+	innerText	--	щоб JS прийняв як текст
+	innerHTML	--	JS прийняв як HTML код
+
+
+name -- якщо у radiobutton одинковий то вони взаємоисключаюшийся
+
+
+<input id="sqrt" type="radio" value="sqrt" name="Туре" ...	--	radiobutton
+
+<input type="color"	-- палітра
+
+
+
+const color = document.getElementById('boxColor').value;
+									//достає колір з палітри
+				
+
+	BOM	--	browser object model
+
+
+  function closeHandle() {
+  	  window.close();		-- закриває головне вікно
+  }
+  
+  
+  window.open("https://gogle.com");	-- відкривається нова вклада
+
+ window.moveTo(200, 200);
+
+
+ console.log(navigator.language);	-- показує мову браузера користувача
+ console.log(navigator.languages);
+
+
+
+function eventsPage() {
+
+		//перенапрявляє на сторінку
+	location.href = "http://127.0.0.1:5500/08_Events/index.html";
+}
+
+	
+	Geolocation
+// navigator.geolocation.getCurrentPosition((data) => {console.log(data)}, () => {console.log("Користувач відхилив запит")});
+
+
+
+history.back	//по вкладці вперед
+history.forward	//по вкладці назад
+
+history.go(n) //по вкладці на n
+
+ теж DOM:
+		alert
+		confirm
+		propmt
+
+window.scroll(0, 0)	--	скролить на верх
 
 
 

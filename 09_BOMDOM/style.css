@@ -1,0 +1,17 @@
+.counterBtns{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+.counterMain{
+    display: inline-flex;
+    background-color: lightblue;
+    padding: 20px;
+    align-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.imgLibrary{
+    display: inline-flex;
+    padding: 20px;
+}
