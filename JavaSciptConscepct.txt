@@ -3149,6 +3149,9 @@ const height = parseInt(circle.style.height.split("px")[0]);
 09_BOM DOM
 
 
+document.getElementsByClass	-- за класом
+document.getElementsByName	--	за тегом
+
 
 Bootstrap IntelliSense	-	bootstrap помічник
 
