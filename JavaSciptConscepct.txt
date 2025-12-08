@@ -3198,6 +3198,21 @@ const box = event.target;
 	innerHTML	--	JS прийняв як HTML код
 
 
+	--зміна кольору черещ dataset
+	
+	<div data-color = "#F5054"....
+
+function changeColorHandle(event) {
+	const button = event.target;
+	const text = document.getElementById("text");
+	text.style.color = button.dataset.color;
+}
+
+
+
+
+
+
 name -- якщо у radiobutton одинковий то вони взаємоисключаюшийся
 
 
@@ -3207,9 +3222,11 @@ name -- якщо у radiobutton одинковий то вони взаємои�
 
 
 
+
 const color = document.getElementById('boxColor').value;
 									//достає колір з палітри
 				
+
 
 	BOM	--	browser object model
 
@@ -3220,12 +3237,14 @@ const color = document.getElementById('boxColor').value;
   
   
   window.open("https://gogle.com");	-- відкривається нова вклада
-
  window.moveTo(200, 200);
+
+
 
 
  console.log(navigator.language);	-- показує мову браузера користувача
  console.log(navigator.languages);
+
 
 
 
@@ -3254,4 +3273,117 @@ history.go(n) //по вкладці на n
 window.scroll(0, 0)	--	скролить на верх
 
 
+---------------------------------------------------------------
+10_Forms
 
+
+form	-	може оновлювати сторінку, відправляти запити
+		сама формує HTTP запит
+
+
+<input type = " "	--	тип данних для вводу
+			
+		email	 -- перевіряє тільик наявність @
+		password -- скриває текст, гугл підставляє, атвогенерує 
+		
+		phone	--
+		url		--
+		search	--
+
+
+	  <div>
+	  	 <input type="submit">	-- кнопка краще
+	  	 <button type="submit"	-- гірше
+	  </div>
+
+
+index.html/08asd/? 	? -- url параметри
+
+
+ action	--	адреса куди відправитиб якщо не вказана відправляє собі
+
+
+  <form name="login" class="form-box" action="#" method="">
+
+  GET	--	отрматаємо щось данні   | не має body
+  POST	--  передаємо щось  серверу | для передачі конфіденційної інфи
+				має body
+								
+HTTPS зашифровує -- body				
+				
+				
+	GET	--	данні у відкритому виді | можна побачити у URL
+
+
+	name	--	обов'язково давати, браузер вичітує що запропонувати 
+										
+<form name="login"...
+
+
+ <form onsubmit = "handle(event)"	-- функція при натисканні
+
+
+FUNCTION loginFormHandle(event) {
+  	 event.preventDefault();	-- зупиняє виконання форми
+  	 
+  	 
+-- для заданої форми 
+
+	let email = form["email"].value	-- вичітується input з 
+								name="email" і береється його знач
+												
+	const password = form["password"];
+	
+
+	
+--  універсальний
+	
+	let form = event.target;
+	 
+ const formData = new FormData(form); -- об'єкт описує данні форми
+ 
+		//запис данні з інпутів		
+ const values = Object.fromEntries(formData.entries());
+ 
+	console.log(values);	-- виведе данні з інпутів
+	
+ }
+--
+
+		//якщо спільний name то будуть взаємо виключаючими
+<div>
+		<input name="language" type="radio"/>
+		<label>C++</label>
+
+		<input name="language" type="radio" />
+
+				//для носолі					//вибирає по дефоту
+		<input value ="js" name="language" type="radio" checked/>
+		<label>JavaScript</label>
+<div/>
+
+
+<div>		//палітра					//по дефолту
+	<input type="color" name="color" value="#0000FF">
+</div>
+
+
+<input type = "date"
+<input type = "datetime-local"
+
+	select
+	
+<select name="select" class="form-select">
+	<option value="ua">Україна</option>
+	<option value="uls">Америка</option>
+	<option value="sp">Іспанія</option>
+	<option selected value="it">Італія</option>
+</select>
+	
+	
+<input type="file"  name="picture"	accept = "image/*"	
+	
+	
+wapplyzer	
+	
+	
