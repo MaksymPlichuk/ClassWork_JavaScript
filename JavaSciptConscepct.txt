@@ -3386,4 +3386,73 @@ FUNCTION loginFormHandle(event) {
 	
 wapplyzer	
 	
+---------------------------------------------------------------
+10_Cookies
+
+
+reload  - не впливає на кукі 
+
+cookie	- текстові данні файли які зберігають данні користувача
+
+локальне сховище малим обсягом, вони тимчасові
+	використ для зручності роботи на сайті
+
+
+пароль зазвичай зберігажться на БД сервері
+
 	
+cookie -- можна побачити у F12 applicattion
+
+
+	--cookie JS--
+	
+document.cookie
+						path -- домен куди будуть записані cookie
+						
+						path=/ --на всьому сайті
+						
+document.cookie = "username=dima; path=/; expires "	
+	
+	якщо не вписати expires -- то cookie закінчаться при сесії
+	
+	expires = HTTP date format	
+	
+			//витягує теперішній час
+expires=${new Date().toUTCString()}
+
+
+  const date = new Date();
+	date.setDate(date.getDate() + 1)
+
+	date.toUTCString()
+
+	 основні дії:
+  створювати
+  читати
+  видаляти
+
+
+function getCookie() {
+	const cookie = document.cookie.split("; ");
+		console.log(cookie);
+		
+	for (const item of cookie) {
+			const data = item.split("=");
+		if(data[0] === "login")
+			console.log(data[1]);
+	break;
+	}
+}
+
+
+nic.ua	--	безкоштовний домен
+
+
+const arr = [1,2,3,4,5,6];
+ const json = JSON.stringify(arr); // перетворює Y JSON
+ const data = JSON.parse(json); /// перетворює із JSON у об'єкт
+
+
+
+
+
