@@ -3051,7 +3051,7 @@ Object.keys(person)	--	повертаэ масив ключів об'єкту pe
 ---------------------------------------------------------------
 08_Events
 
-JSON formatter	-	для зручніших JSON
+розширення JSON formatter	-	для зручніших JSON
 
 forin	-	для об'єктів
 forof	-	для масивів
@@ -3454,5 +3454,76 @@ const arr = [1,2,3,4,5,6];
 
 
 
+let cookies = '[(1, 2, 3), (5, 2, 6)]';	
+const arr = JSON.parse(cookies);	-- перетворюється на JSON
+arr.push("(6, 46, 13)");	--	додається в кінець
+
+cookies = JSON.stringify(arr);	-- назад в cookies
+
+
+const cookie= getCookie("codes");		-- дфчтвє cookie
+	if(cookie) {
+		const arr = JSON.parse(cookie);	--перетвор у json
+		arr.push(code);					--додає код
+		setCookieByDays("codes", JSON.stringify(arr), 1);	-- перетвор у cookies
+	} else {
+setCookieByDays ("codes", JSON.stringify([code]), 1);
+
+
+	Алгоритм працювання з cookie
+
+ ✅ достати cookie
+ 
+ ✅ перетвор у json
+ 
+ ✅ додати код у json
+ 
+ ✅ перетвор назад у (str)cookies
+ 
+
+---------------------------------------------------------------
+11_LocalStorage_Json
+
+
+map js	== select C#
+дозволяє перетворити колекцію одного типу у колекцію іншого типу
+
+
+JSON	--	для передачі данних між різними мовами
+
+
+JSON.stringify();	// Object -> JSON	запис у LocalStorage
+		
+JSON.parse(); 		// JSON -> Object	читаєм у LocalStorage
+		
+
+LocalStorage	--	key value
+
+	не кофіденцйні данні | не має терміну життя
+
+
+	--методи--
+
+ localStorage.setItem()
+ localStorage.getItem()
+ localStorage.removeItem()
+ localStorage.clear()
+
+
+localStorage.setItem("username", "mike")
+
+	отримати данні якщо ключа не існує повернеться null
+const username = localStorage.getItem("username")
+if()
+
+F12 -> applicattion -> local storage
+
+
+input.value	--	саме значення
+
+	key value живе вічно більше розмір
+localStorage	-- коли данні не впливає на безпеку користувача (тема,кошик)
+
+cookie	--	дані мають бути захищеними
 
 
