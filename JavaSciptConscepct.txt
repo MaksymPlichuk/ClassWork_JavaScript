@@ -3276,51 +3276,98 @@ window.scroll(0, 0)	--	скролить на верх
 ---------------------------------------------------------------
 10_Forms
 
+		тегі для SEO
+	<footer
+	<header
+	<content
+	<side
 
-form	-	може оновлювати сторінку, відправляти запити
+
+
+
+		блочний елемент дозволяє вичитувати значення які ввелись
+form	-	може оновлювати сторінку, відправляти запити (GET POST)
 		сама формує HTTP запит
 
 
+  кожен input маэ бути у form
+
+
+	 структура:
+	 
+	<form name="login" >...
+	 <input..
+		</form>
+
+	
+
+
+				як валідатор і дає браузеру пдставити данні
 <input type = " "	--	тип данних для вводу
 			
 		email	 -- перевіряє тільик наявність @
 		password -- скриває текст, гугл підставляє, атвогенерує 
 		
-		phone	--
-		url		--
-		search	--
+		submit	 -- кнопка відправки
+		phone	 --
+		url		 --
+		search	 --
 
 
-	  <div>
+	  <div>			//кнопка відправки
 	  	 <input type="submit">	-- кнопка краще
-	  	 <button type="submit"	-- гірше
+		 
+		<button type="submit"	-- гірше
 	  </div>
 
 
-index.html/08asd/? 	? -- url параметри
+   КРАЩЕ самому робити валідацію інпутів бо їх 
+				легко обійти через зміну type у HTML
 
 
- action	--	адреса куди відправитиб якщо не вказана відправляє собі
 
 
+
+
+index.html/08asd/? 	
+			
+			? -- url параметри можна передавати певні данні
+
+
+
+ <form..  action	--	адреса куди відправитиб якщо не вказана відправляє собі
+
+											заглушка
   <form name="login" class="form-box" action="#" method="">
 
-  GET	--	отрматаємо щось данні   | не має body
-  POST	--  передаємо щось  серверу | для передачі конфіденційної інфи
-				має body
+
+
+		method =
+		
+		GET		--	отрматаємо щось данні   | не має body
+		POST	--  передаємо щось  серверу | для передачі конфіденційної інфи
+				має body тому їх важче перехопити
+								
 								
 HTTPS зашифровує -- body				
 				
 				
 	GET	--	данні у відкритому виді | можна побачити у URL
+	Post -- їх зашифрує
 
 
-	name	--	обов'язково давати, браузер вичітує що запропонувати 
+								форма вичітує всі інпути через name
+	name	--	обов'язково давати, браузер вичітує по name
+													 що запропонувати (автозаповнення)
 										
-<form name="login"...
+<input name="login"...
 
 
- <form onsubmit = "handle(event)"	-- функція при натисканні
+
+
+ <form onsubmit = "loginFormHandle(event)"	-- функція при натисканні яка спрацює
+									коли буде натиснутий input з type "submit"
+
 
 
 FUNCTION loginFormHandle(event) {
@@ -3329,6 +3376,9 @@ FUNCTION loginFormHandle(event) {
   	 
 -- для заданої форми 
 
+	let form = event.target;
+	
+
 	let email = form["email"].value	-- вичітується input з 
 								name="email" і береється його знач
 												
@@ -3336,7 +3386,7 @@ FUNCTION loginFormHandle(event) {
 	
 
 	
---  універсальний
+--  УНІВЕРСАЛЬНИЙ
 	
 	let form = event.target;
 	 
@@ -3349,6 +3399,21 @@ FUNCTION loginFormHandle(event) {
 	
  }
 --
+
+	HTML:
+ 
+<input type = "checkbox" name = "rules"....
+
+
+	JS:
+
+let checkbox = form["rules"]	-- дістаємо галочку
+console.log(checkbox.checked)	-- виводить true/false
+ 
+ 
+ 
+ 
+
 
 		//якщо спільний name то будуть взаємо виключаючими
 <div>
@@ -3368,8 +3433,39 @@ FUNCTION loginFormHandle(event) {
 </div>
 
 
-<input type = "date"
-<input type = "datetime-local"
+
+			<!-- тільки дата -->
+			
+	<input type="date" name="date" value="2026-01-01" />
+	
+	
+	
+			<!-- дата та час -->
+			
+	<input type="datetime-local" name="datetime" />
+	
+	
+	
+			<!-- тільки час -->
+			
+	<input type="time" name="time" />
+	
+	
+	
+			<!-- тиждень -->
+			
+	<input type="week" name="week" />
+	
+	
+	
+			<!-- місяць -->
+			
+	<input type="month" name="month" />
+	
+	
+	
+<input type="range" name="range" max="100" value="25" />
+
 
 	select
 	

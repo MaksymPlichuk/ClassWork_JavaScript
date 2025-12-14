@@ -1,51 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
-    
-    <div class="text-center mt-5" style="background-color: bisque;">
-        <div class="card">
-            <div>
-                <h5>name</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis, laborum?</p>
-            </div>
-            <div>
-                <label for="">Your name:</label>
-                <form action="">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span
-                            class="input-group-text"
-                            id="inputGroup-sizing-default"
-                            >Password</span>
-                        </div>
-                        <input
-                        name="password"
-                        type="password"
-                        class="form-control"
-                        value="qwerty"/>
-                    </div>
-                </form>
-            </div>
-            <div>
-                <form action=""></form></div>
-                <div>
-                    <input class="btn btn-primary" type="submit" value="Увійти" />
+    <div class="text-center mt-5 allCards" style="background-color: bisque;">
+
+        <div id="cards">
+            <div class="text-center mt-5 mainCard">
+                <div class="header">
+                    <h5 style="margin-left: 20px;">Name: </h5>
+                    <h5>Date: </h5>
                 </div>
+                <div>
+                    <p style="text-wrap:initial;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis,
+                        laborum?</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <label>Add a message:</label>
+
+            <form onsubmit="formSubmit(event)" method="get" class="form-box">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Your name</span>
+                    </div>
+                    <input name="name" type="text" class="form-control" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Your message</span>
+                    </div>
+                    <input name="message" type="text" class="form-control" />
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="add" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="text-center mt-5 loginForm" style="background-color: bisque;">
+        <div>
+            <form onsubmit="loginFormSubmit(event)" method="get" class="form-box">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Your Email</span>
+                    </div>
+                    <input name="email" type="email" class="form-control" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Your Login</span>
+                    </div>
+                    <input name="name" type="text" class="form-control" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Your Password</span>
+                    </div>
+                    <input name="pass" type="password" class="form-control" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Repeat password</span>
+                    </div>
+                    <input name="repPass" type="password" class="form-control" />
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Sign Up" />
+                </div>
+            </form>
         </div>
     </div>
+
+    <div class="text-center mt-5 colorForm" style="background-color: bisque;">
+        <div>
+            <form onsubmit="colorFormSubmit(event)" method="get" class="form-box ">
+                <div class="colorInputs">
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">R</span>
+                    </div>
+                    <input name="r" type="text" class="form-control" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">G</span>
+                    </div>
+                    <input name="g" type="text" class="form-control" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">B</span>
+                    </div>
+                    <input name="b" type="text" class="form-control" />
+                </div>
+                </div>
+                
+                <div>
+                    <input class="btn btn-primary" type="submit" value="add" style="margin: 5px;"/>
+                </div>
+            </form>
+        </div>
+        <div id="colors" class="colors">
+            <div class="colorInfo">
+                <div class="box" style="background-color: red;"></div>
+                <div>
+                    <p class="colorText">RGB(162,56,26)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script src="base.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
