@@ -12,34 +12,39 @@
 </head>
 
 <body>
-    <div class="container" style="background-color: bisque;">
+    <div class="container mainForm" style="background-color: bisque;">
         <div class="text-center">
             <h2>Create new Color</h2>
-            <form action="">
-                <div class="input-group mb-3">
-                    <label for="">Color</label>
-                    <input width="50px" name="text" type="text" class="form-control" />
+            <form onsubmit="createColor(event)" action="">
+
+                <div class="formInputs">
+                    <label for="">Color:</label>
+                    <input width="50px" name="color" type="text" class="form-control" />
+
+                    <select name="select" class="form-select">
+                        <option value="rgba">RGBA</option>
+                        <option value="hex">HEX</option>
+                        <option selected value="rgb">RGB</option>
+                    </select>
+                    <label for="">Code:</label>
+                    <input name="code" type="text" class="form-control" />
+                    <input type="submit"></input>
                 </div>
+
             </form>
-            <select name="select" class="form-select">
-                <option value="rgba">RGBA</option>
-                <option value="hex">HEX</option>
-                <option selected value="rgb">RGB</option>
-            </select>
-            <label for="">Code</label>
-            <input width="50px" name="text" type="text" class="form-control" />
-            <button>save</button>
+
         </div>
         <div class="text-center mt-5">
             <h2>All colors</h2>
-            <div class="AddedColors">
-                <div style="background-color: green;">
-                    <div style="background-color: lightgreen;">
-                        <p>YELLOWGREEN</p>
-                        <p>RGB</p>
-                        <p>154,256,55</p>
-                    </div>
+            <div class="addedColors" id="boxList">
+                <div class="box" style="background-color: green;">
+                        <div class="text-center innerBox" style="background-color: lightgreen;">
+                            <p>YELLOWGREEN</p>
+                            <p>RGB</p>
+                            <p>154,256,55</p>
+                        </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -1,0 +1,28 @@
+.addedColors{
+    margin: 5px auto;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.mainForm{
+    text-align: center;
+    
+}
+.formInputs{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin: 5px;
+}
+.box{
+    margin: 5px auto;
+    padding: 15px;
+}
+.innerBox{
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    
+}

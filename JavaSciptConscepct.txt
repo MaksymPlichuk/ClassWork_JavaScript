@@ -3486,12 +3486,15 @@ wapplyzer
 10_Cookies
 
 
+кешування допомагаэ браузеру швидше загрузитись
+
+
 reload  - не впливає на кукі 
 
 cookie	- текстові данні файли які зберігають данні користувача
 
-локальне сховище малим обсягом, вони тимчасові
-	використ для зручності роботи на сайті
+	локальне сховище малим обсягом (4кб), вони тимчасові
+		використ для зручності роботи на сайті	можуть передаватись по HTTP запиту
 
 
 пароль зазвичай зберігажться на БД сервері
@@ -3502,7 +3505,7 @@ cookie -- можна побачити у F12 applicattion
 
 	--cookie JS--
 	
-document.cookie
+document.cookie = "key=value;"
 						path -- домен куди будуть записані cookie
 						
 						path=/ --на всьому сайті
@@ -3522,24 +3525,33 @@ expires=${new Date().toUTCString()}
 
 	date.toUTCString()
 
-	 основні дії:
+	 ОСНОВНІ ДІЇ:
   створювати
   читати
   видаляти
 
+							//читати
+ function getCookie() {
+ 	 const cookie = document.cookie.split("; ");	-- розділяємо по `;`
+ 	 	console.log(cookie);
+ 	 	
+ 	 for (const item of cookie) {
+ 	 		const data = item.split("=");		-- розділяємо ключ=знач
+ 	 	if(data[0] === "login")
+ 	 		console.log(data[1]);
+ 	 break;
+ 	 }
+ }
 
-function getCookie() {
-	const cookie = document.cookie.split("; ");
-		console.log(cookie);
-		
-	for (const item of cookie) {
-			const data = item.split("=");
-		if(data[0] === "login")
-			console.log(data[1]);
-	break;
+							// видалення
+	function deleteCookie(name) {
+		document.cookie = `${name}=;path=/;expires=Thu, 1 January 1970 00:00:00 GMT`
 	}
-}
 
+							// запис
+	function setCookie(name, value, expires) {
+		document.cookie = `${name}=${value};path=/;expires=${expires}`;
+	}
 
 nic.ua	--	безкоштовний домен
 
