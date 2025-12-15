@@ -3427,11 +3427,12 @@ console.log(checkbox.checked)	-- виводить true/false
 		<label>JavaScript</label>
 <div/>
 
+	value - користувач не бачить використовується для JS
+
 
 <div>		//палітра					//по дефолту
 	<input type="color" name="color" value="#0000FF">
 </div>
-
 
 
 			<!-- тільки дата -->
@@ -3635,3 +3636,161 @@ localStorage	-- коли данні не впливає на безпеку ко
 cookie	--	дані мають бути захищеними
 
 
+---------------------------------------------------------------
+12_destructuring spread interval timeout
+
+
+			--ДЕСТРУКТУРИЗАЦІЯ--
+
+let arr1 = [12,5,48,7]
+let arr2 = [...arr1]	-- ... передає кожен елемент arr1 окремо
+
+
+arr1[0] = 999;	-- змінить і 
+
+
+const obj1 = { type: "default", value: 1 }
+const obj2 = { ...obj1 };	-- запише { type: "default", value: 1 }
+
+
+
+{ }	- тут не створення а розпаковка
+
+	має співпадати з назвою власт
+const { value } = obj;		-- те саме const value = obj1.value
+console.log(value);
+
+	const { value,type } = obj;		//використ для великих об'єктів
+	
+		те саме що
+		
+	obj1.value obj1.type
+
+
+cpnst inputName = document.getElementById("name")
+
+const {value,name} = inputName	-- створюються змінні name value 
+										які беруть значення з inputName
+	console.log(name)
+	console.log(value)
+
+
+
+const [first,second] = arr1;
+
+	first - буде записаний 1 елем масиву
+	second - буде записаний 2 елем масиву
+
+
+const state = [5, () => {}]
+const [number, setNumber] = [5, () => {}];
+
+state[0] = 5
+state[1]() = setNumber()
+
+
+const tag = {....
+	}
+
+const { width, height } = tag;
+const area = width * height;
+const area = tag,width * tag.height;
+
+
+
+деструктаризуаіція - під час передачі об'єкта у функцію
+
+ function boxArea ( {width, height} ) {		-- бере змінні при boxArea(tag) 
+ 	 return width* height;
+ }
+ 
+
+boxArea(tag)	--	передає змінні у функції, тобто 
+									{width, height} =  tag
+
+	NaN	-- not a number
+
+
+const myValue = {
+	id: 1,
+	value: 50,
+	type: "int"
+}
+
+const newValue = {...myValue, date: new Date()};
+console.log(newValue);
+
+
+
+const user = {
+	firstName: "Mike",
+	lastName: "Thomson"
+};
+
+const cred = {
+	login: "mike",
+	password: "qwerty"
+};
+
+const mike = (...user, ...cred);
+console.log(mike);	-- об'єднання двох об'єктів
+
+
+
+			//можна написати буд що головне 3 краки
+function sum(...args){		-- C# params
+	.....
+}
+
+
+
+ let personalData = {
+ 	 email: "user@mail.com",
+ 	 firstName: "Mike",
+ 	 lastName: "Thomson",
+ 	 age: 50,
+ 	 address: "Soborna str"
+ }
+								//можна маштабуватися
+personalData = (...personalData, email: "newemail@mail.com");
+
+
+ об'єкти не можна редагувати, маємо перестворити об'єкт 
+								тобто деструктаризуаіція
+ 
+ 
+  personalData.email = "newemail@" -- нічого не змінить у REACT
+ 
+ 
+	---SET TIMEOUT---
+ 
+setTimeout(printTitle, 5000);	-- викликає функцію з затримкой 
+ 
+ 
+ багатопотокове	-- для кожної задачі кожен потік	
+ 
+ асинхронне --	в одному потоці коли щось довго виконується то потік переключається
+ 
+ 
+				//async
+setInterval()	--	інтервал між двома функціями
+
+
+	setInterval(addItem, 2000)	-- безкінечно повторює addItem
+
+
+Handle	--	обробник, рефакторінг
+
+ 
+ 
+ height: 100vh	-- весь екран
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
