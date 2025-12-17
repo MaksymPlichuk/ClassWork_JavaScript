@@ -1,0 +1,8 @@
+function loadUserInfo(){
+
+
+}
+
+function loadPosts(){
+    
+}

@@ -3786,9 +3786,37 @@ Handle	--	обробник, рефакторінг
  height: 100vh	-- весь екран
  
  
+---------------------------------------------------------------
+13_API
+
+
+api key -- унікальний ключ користувача
+
+ без нього якщо кидати get запит буде помилка 401
  
  
+	Під кожне api свій код: newsApi
  
+													//айпі ключ						//ключове слов it	//20 новин на сторінку //мова укр
+let newsApiUrl	=	"https://newsapi.org/v2/everything?apiKey=eef038525fa7401d8dfe7cf1a9006b10&q=it&pageSize=20&language=uk"
+
+? -- після нього параметри які данні отримати
+
+ & -- ще один параметр
+
+ q -- ключеве слово по якому шуати
+  
+ всі адресу будуть у -- lower case 
+  
+ 
+async function fetchNews() {
+	
+	let respone = await fetch(newsApiUrl)
+	let data = await respone.json()
+	
+	const { articles } = data	-- деструктаризація
+	
+ } 
  
  
  

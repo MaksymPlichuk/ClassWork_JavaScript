@@ -1,0 +1,18 @@
+.namesBox{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nameBox{
+    border: black solid 1px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+td{
+    border: 1px solid black;
+    padding: 5px;
+}
+table{
+    margin: 1px auto;
+}
