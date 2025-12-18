@@ -28,7 +28,11 @@
                     </select>
                     <label for="">Code:</label>
                     <input name="code" type="text" class="form-control" />
-                    <input type="submit"></input>
+                    <div class="mt-3">
+                        <input type="submit" value="Save" class="btn btn-success"></input>
+                        <button onclick="deleteCookie()" class="btn btn-danger">Delete Cookies</button>
+                    </div>
+
                 </div>
 
             </form>
@@ -37,13 +41,13 @@
         <div class="text-center mt-5">
             <h2>All colors</h2>
             <div class="addedColors" id="boxList">
-                <div class="box" style="background-color: green;">
-                        <div class="text-center innerBox" style="background-color: lightgreen;">
-                            <p>YELLOWGREEN</p>
-                            <p>RGB</p>
-                            <p>154,256,55</p>
-                        </div>
-                </div>
+                <!-- <div class="box" style="background-color: green;">
+                    <div class="text-center innerBox" style="background-color: lightgreen;">
+                        <p>YELLOWGREEN</p>
+                        <p>RGB</p>
+                        <p>154,256,55</p>
+                    </div>
+                </div> -->
 
             </div>
         </div>
