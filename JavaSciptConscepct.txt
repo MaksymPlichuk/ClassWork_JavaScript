@@ -3599,33 +3599,48 @@ map js	== select C#
 
 
 JSON	--	для передачі данних між різними мовами
+	текствоий тип данних дозволяє перетворювати obj у str
 
 
-JSON.stringify();	// Object -> JSON	запис у LocalStorage
+JSON.stringify();	// Object -> JSON	запис у LocalStorage		arr --> str
+			
+JSON.parse(); 		// JSON -> Object	читаєм у LocalStorage		str --> arr
 		
-JSON.parse(); 		// JSON -> Object	читаєм у LocalStorage
-		
 
-LocalStorage	--	key value
+LocalStorage	--	key value,	розмір 5 мб
 
 	не кофіденцйні данні | не має терміну життя
 
 
 	--методи--
 
- localStorage.setItem()
- localStorage.getItem()
- localStorage.removeItem()
- localStorage.clear()
+ localStorage.setItem()		-- задає item
+ localStorage.getItem()		-- дістає item
+ localStorage.removeItem()	-- видаляє один item 
+ localStorage.clear()		-- видаляє всі 
 
 
-localStorage.setItem("username", "mike")
+						//key        //value
+  localStorage.setItem("username", "mike")
 
-	отримати данні якщо ключа не існує повернеться null
+
+
+
+	//отримати данні якщо ключа не існує повернеться null
 const username = localStorage.getItem("username")
-if()
+
+	if(username)
+		console.log(user)
+
+
+localStorage.removeItem("pass")		--	якщо pass немає то нічого не станеться
+localStorage.clear()	--	видалить все
+
+
 
 F12 -> applicattion -> local storage
+
+RMB save as	--	скачує сайт
 
 
 input.value	--	саме значення
@@ -3818,7 +3833,21 @@ async function fetchNews() {
 	
  } 
  
+---------------------------------------------------------------
+14_API 
+по дкфолту елем займає всю ширину, d-flex justify.. вирінює
+https://newsapi.org 	-- 100 новин безкоштовно, до 5 сторінок
+
+// user location
+navigator.geolocation.getCurrentPosition(succesPosition, errorPosition); 
+
+call back function -- при закінченні викликає іншу функцію
  
+ 
+succesPosition()	--	викличеться якщо користувач надасть доступ
+ 
+errorPosition()	--	якщщо відмов
+https://ip-api.com/ 
  
  
  

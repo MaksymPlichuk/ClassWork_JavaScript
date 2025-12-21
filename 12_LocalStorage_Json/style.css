@@ -1,0 +1,19 @@
+.mainBOX{
+    background-color: bisque;
+    padding: 20px;
+}
+.boxWithInputs{
+    display:flex;
+    margin: 5px;
+    gap: 1%;
+}
+#bdayRadio{
+    gap: 5%;
+}
+#sumbInput{
+    width: 100%;
+}
+
+th{
+    border: 1px solid black;
+}
