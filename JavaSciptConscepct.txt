@@ -3655,7 +3655,16 @@ cookie	--	дані мають бути захищеними
 12_destructuring spread interval timeout
 
 
+<input value="red"	type="checkbox"..> -- виведе `red` замість `on`
+
+
+
 			--ДЕСТРУКТУРИЗАЦІЯ--
+
+ let arr1 = [12,5,48,7]
+ let arr2 = arr1		-- два покажчики на 1 ділянку пам'яті
+
+
 
 let arr1 = [12,5,48,7]
 let arr2 = [...arr1]	-- ... передає кожен елемент arr1 окремо
@@ -3673,7 +3682,7 @@ const obj2 = { ...obj1 };	-- запише { type: "default", value: 1 }
 
 	має співпадати з назвою власт
 const { value } = obj;		-- те саме const value = obj1.value
-console.log(value);
+console.log(value);		-- якщо такої властивості не буде вийде undefined
 
 	const { value,type } = obj;		//використ для великих об'єктів
 	
@@ -3697,11 +3706,15 @@ const [first,second] = arr1;
 	second - буде записаний 2 елем масиву
 
 
+
+
 const state = [5, () => {}]
 const [number, setNumber] = [5, () => {}];
 
-state[0] = 5
-state[1]() = setNumber()
+state[0]   // = 5
+state[1]() // = setNumber()
+
+
 
 
 const tag = {....
@@ -3709,14 +3722,15 @@ const tag = {....
 
 const { width, height } = tag;
 const area = width * height;
-const area = tag,width * tag.height;
+
+	//const area = tag,width * tag.height;
 
 
 
-деструктаризуаіція - під час передачі об'єкта у функцію
+  --деструктаризуаіція  під час передачі об'єкта у функцію--
 
  function boxArea ( {width, height} ) {		-- бере змінні при boxArea(tag) 
- 	 return width* height;
+ 	 return width * height;
  }
  
 
@@ -3731,7 +3745,7 @@ const myValue = {
 	value: 50,
 	type: "int"
 }
-
+				//копіює старий    додає новий елемент
 const newValue = {...myValue, date: new Date()};
 console.log(newValue);
 
@@ -3780,6 +3794,11 @@ personalData = (...personalData, email: "newemail@mail.com");
 	---SET TIMEOUT---
  
 setTimeout(printTitle, 5000);	-- викликає функцію з затримкой 
+ 
+ let timeoutID = setTimeout(printTitle,5000)
+ 
+ clearTimeout(timeoutID)	--	прибираэ тайм аут
+ 
  
  
  багатопотокове	-- для кожної задачі кожен потік	
