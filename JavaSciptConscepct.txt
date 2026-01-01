@@ -3484,7 +3484,7 @@ console.log(checkbox.checked)	-- виводить true/false
 wapplyzer	
 	
 ---------------------------------------------------------------
-10_Cookies
+11_Cookies
 
 
 кешування допомагаэ браузеру швидше загрузитись
@@ -3591,7 +3591,7 @@ setCookieByDays ("codes", JSON.stringify([code]), 1);
  
 
 ---------------------------------------------------------------
-11_LocalStorage_Json
+12_LocalStorage_Json
 
 
 map js	== select C#
@@ -3652,7 +3652,7 @@ cookie	--	дані мають бути захищеними
 
 
 ---------------------------------------------------------------
-12_destructuring spread interval timeout
+13_destructuring spread interval timeout
 
 
 <input value="red"	type="checkbox"..> -- виведе `red` замість `on`
@@ -3821,13 +3821,15 @@ Handle	--	обробник, рефакторінг
  
  
 ---------------------------------------------------------------
-13_API
+14_API
 
 
 api key -- унікальний ключ користувача
 
  без нього якщо кидати get запит буде помилка 401
  
+ 
+ Безкоштовно 100 новин і 5 сторінок
  
 	Під кожне api свій код: newsApi
  
@@ -3840,7 +3842,7 @@ let newsApiUrl	=	"https://newsapi.org/v2/everything?apiKey=eef038525fa7401d8dfe7
 
  q -- ключеве слово по якому шуати
   
- всі адресу будуть у -- lower case 
+ всі адресу будуть у -- lower case бо URL автоматично його перетворює
   
  
 async function fetchNews() {
@@ -3853,7 +3855,7 @@ async function fetchNews() {
  } 
  
 ---------------------------------------------------------------
-14_API 
+15_API 
 по дкфолту елем займає всю ширину, d-flex justify.. вирінює
 https://newsapi.org 	-- 100 новин безкоштовно, до 5 сторінок
 
