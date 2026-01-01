@@ -11,54 +11,45 @@ function fetchUsers() {
         box.innerHTML = ``;
         table.innerHTML = ``;
         for (const user of data) {
-            let div = getUserNames(user);
-            box.appendChild(div);
+            box.innerHTML += `<div class="col-3 nameBox" onclick="loadUserInfo(event,'${user.id}')">${user.name}</div>`
         }
-    })
+    }).catch(e => console.warn(e));
 }
 
 document.addEventListener("DOMContentLoaded", fetchUsers);
 document.addEventListener("DOMContentLoaded", loadPosts);
 
 
-
-function getUserNames(user) {
-    const div = document.createElement(`div`);
-    div.innerHTML = `<div class="col-3 nameBox" onclick="loadUserInfo(event,'${user.id}')">${user.name}</div>`
-    return div;
-}
-
-function loadUserInfo(event,userID) {
+function loadUserInfo(event, userID) {
     fetch(url + `/${userID}`).then(response => response.json()).then(data => {
-        for (const user of data) {
-            if (user.name == event.target.innerText) {
-                table.innerHTML = `<tr>
+        console.log(data)
+
+        table.innerHTML = `<tr>
                         <td>Name:</td>
-                        <td>${user.name}</td>
+                        <td>${data.name}</td>
                     </tr>
                     <tr>
                         <td>Username:</td>
-                        <td>${user.username}</td>
+                        <td>${data.username}</td>
                     </tr>
                     <tr>
                         <td>Address:</td>
-                        <td>${parseAdress(user)}</td>
+                        <td>${parseAdress(data)}</td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>${user.email}</td>
+                        <td>${data.email}</td>
                     </tr>
                     <tr>
                         <td>Phone:</td>
-                        <td>${user.phone}</td>
+                        <td>${data.phone}</td>
                     </tr>
                     <tr>
                         <td>Website:</td>
-                        <td>${user.website}</td>
+                        <td>${data.website}</td>
                     </tr>`;
-                selectUserID = user.id;
-            }
-        }
+        selectUserID = data.id;
+
     }).catch(e => console.warn(e));
     postsBox.innerHTML = ``;
 }
@@ -75,11 +66,11 @@ function loadPosts() {
     fetch(postsURL).then(response => response.json()).then(data => {
         for (const post of data) {
             if (post.userId == selectUserID) {
-                postsBox.innerHTML+=`<div class="box col-3">
+                postsBox.innerHTML += `<div class="box col-3">
                             <h6>${post.title}</h6>
                             <p>${post.body}</p>
                         </div>`
             }
         }
-    })
+    }).catch(e => console.warn(e));
 }
