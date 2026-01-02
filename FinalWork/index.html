@@ -31,8 +31,8 @@
                     </li>
 
                 </ul>
-                <form class="d-flex">
-                    <input id="cityInput" class="form-control me-sm-2" type="search" placeholder="Vladivostok, RU">
+                <form class="d-flex" onsubmit="submtiFormHandle(event)">
+                    <input id="cityInput" class="form-control me-sm-2" type="search" name="city" placeholder="London, GB">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
@@ -62,7 +62,7 @@
             <div class="m-3 d-flex justify-content-between">
                 <p class="">Hourly</p>
             </div>
-            <div class="d-flex justify-content-evenly">
+            <div class="d-flex justify-content-center">
                 <table class="table m-3">
                     <tr class="table-dark" id="tHourRow">
 
@@ -98,60 +98,43 @@
     </div>
     <div id="fiveDayForecast">
 
-        <div class="mx-5 mt-3 d-flex justify-content-evenly" style="background-color: white;" id="fiveDayCards">
-            <div class="mt-5 m-3" style="background-color: lightslategray; padding: 15px;">
-                <p style="font-size: 32px;">TONIGHTH</p>
-                <p>JUN 30</p>
-                <img src="" alt="moon">
-                <p style="font-size: 48px;">25℃</p>
-                <p>short, desc</p>
-            </div>
+        <div class="mx-5 mt-3 d-flex justify-content-center gap-3" style="background-color: white;" id="fiveDayCards">
+
         </div>
         <div class="mx-5 mt-3 " style="background-color: white;">
             <div class="m-3 d-flex justify-content-between">
                 <p class="">Hourly</p>
             </div>
             <div class="d-flex justify-content-evenly">
-                <table class="table m-3" id="tableForecast">
-                    <tr class="table-dark">
-                        <th scope="row">Today</th>
-                        <td>7pm</td>
-                        <td>8pm</td>
-                        <td>10pm</td>
-                    </tr>              
-                    <tr class="table-light">
-                        <th scope="row"></th>
-                        <td><img src="" alt="sunny"></td>
-                        <td><img src="" alt="sunny"></td>
-                        <td><img src="" alt="moon"></td>
+                <table class="table m-3">
+                    <tr class="table-dark" id="secondTHourRow">
+
                     </tr>
-                    <tr class="table-dark">
-                        <th scope="row">Forecast</th>
-                        <td>Sunny</td>
-                        <td>sunny</td>
-                        <td>Clear</td>
+                    <tr class="table-light" id="secondTHourImg">
+
                     </tr>
-                    <tr class="table-light">
-                        <th scope="row">Temp (C)</th>
-                        <td>29</td>
-                        <td>27</td>
-                        <td>15</td>
+                    <tr class="table-dark" id="secondTHourForecast">
+                        <td class="text-center">select day</td>
                     </tr>
-                    <tr class="table-dark">
-                        <th scope="row">Real Feel</th>
-                        <td>28</td>
-                        <td>26</td>
-                        <td>16</td>
+                    <tr class="table-light" id="secondTHourTemp">
+
                     </tr>
-                    <tr class="table-light">
-                        <th scope="row">Wind (km/h)</th>
-                        <td>11 ESE</td>
-                        <td>8 ESE</td>
-                        <td>16 ESE</td>
+                    <tr class="table-dark" id="secondTHourRealTemp">
+
                     </tr>
-            </table>
+                    <tr class="table-light" id="secondTHourWSpeed">
+
+                    </tr>
+                </table>
 
             </div>
+        </div>
+    </div>
+    <div id="error404Tab">
+        <div class="mx-5 mt-3 " style="background-color: white;">
+            <div class="m-3 d-flex flex-column justify-content-center" id="error404Div">
+                
+            </div>            
         </div>
     </div>
     <script src="base.js"></script>

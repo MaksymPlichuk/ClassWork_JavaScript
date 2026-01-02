@@ -1,3 +1,10 @@
 p{
     color: black;
 }
+.box{
+    background-color: lightslategray; 
+    padding: 15px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+}
